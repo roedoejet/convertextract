@@ -1,0 +1,8 @@
+include requirements/*
+include MANIFEST.in
+include README.rst
+include LICENSE
+exclude .gitignore
+recursive-exclude * *.py[co]
+recursive-exclude * *~ 
+recursive-exclude * *.orig
