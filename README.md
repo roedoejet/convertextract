@@ -20,6 +20,7 @@ Basic Textract functions are preserved. Please visit <http://textract.readthedoc
 
 #### Converting a file based on xlsx
 convertextract requires two arguments:
+
 1. A file containing text to convert (as of Version 1.0.4, this includes **.pptx**, **.docx**, **.xlsx**, and **.txt**)
 2. An **.xlsx** file containing the find/replace correspondences.
 
