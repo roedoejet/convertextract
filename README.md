@@ -10,7 +10,7 @@ To install, you must have Python 2.7 and pip installed.
 ```{r, engine='python', count_lines}
 pip install convertextract
 ```
-Some source libraries need to be installed in various ways for different operating systems. Visit <http://textract.readthedocs.org/en/latest/installation.html> for documentation.
+Some source libraries need to be installed for different operating systems to support various file formats. Visit <http://textract.readthedocs.org/en/latest/installation.html> for documentation.
 
 =========
 
