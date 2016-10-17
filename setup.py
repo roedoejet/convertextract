@@ -7,9 +7,8 @@ import convertextract
 # get all of the scripts
 scripts = glob.glob("bin/*")
 
-# read in the description from README
-with open("README.rst") as stream:
-    long_description = stream.read()
+
+long_description = 'Extract and find/replace text based on arbitrary correspondences while preserving original file formatting. This library is a fork from the Textract library by Dean Malmgren.'
 
 github_url='https://github.com/roedoejet/convertextract'
 
@@ -30,7 +29,7 @@ with open(filename, 'r') as stream:
 setup(
     name=convertextract.NAME,
     version=convertextract.VERSION,
-    description="Extract and convert non-Unicode text into Unicode. Based on Textract library by Dean Malmgren",
+    description="Extract and find/replace text based on arbitrary correspondences while preserving original file formatting.",
     long_description=long_description,
     url=github_url,
     download_url="%s/archives/master" % github_url,
