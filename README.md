@@ -10,12 +10,13 @@ To install, you must have Python 2.7 and pip installed.
 ```{r, engine='python', count_lines}
 pip install convertextract
 ```
+Some source libraries need to be installed in various ways for different operating systems. Visit <http://textract.readthedocs.org/en/latest/installation.html> for documentation.
 
 =========
 
 ## Basic CLI Use
 
-Basic Textract functions are preserved. Please visit <http://convertextract.readthedocs.org> for documentation.
+Basic Textract functions are preserved. Please visit <http://textract.readthedocs.org> for documentation.
 
 #### Converting a file based on xlsx
 convertextract requires two arguments:
