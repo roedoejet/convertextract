@@ -1,12 +1,3 @@
-.. NOTES FOR CREATING A RELEASE:
-..
-..   * bump the version number in convertextract.__init__.py
-..   * update docs/changelog.rst
-..   * git push
-..   * python setup.py sdist
-..   * python setup.py bdist_wheel
-..   * twine upload dist/*
-
 # convertextract
 ========
 
