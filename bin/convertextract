@@ -1,4 +1,4 @@
-#!c:\python27\python.exe
+#!/usr/bin/env python
 # -*- mode: python -*-
 # PYTHON_ARGCOMPLETE_OK
 

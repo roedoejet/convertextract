@@ -61,6 +61,11 @@ def get_parser():
              ' in the form of a path to an xlsx or from a predefined correspondence'
             ' list. For a full list please visit www.****.com',
     )
+    parser.add_argument(
+        '-p', '--path', type=str,
+        help='Specify path for conversion'
+              'for multiple paths, must be comma-delimited string',
+    )
 #    parser.add_argument(
 #        '-O', '--option', type=str, action=AddToNamespaceAction,
 #        help=(

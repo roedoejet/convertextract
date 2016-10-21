@@ -21,20 +21,36 @@ class Parser(BaseParser):
             if not isinstance(kwargs["language"], type(None)):
                 cors = processCors(kwargs["language"]).cor_list
                 cors.sort(key=lambda x: len(x["from"]), reverse=True)
-                for row in ws:
-                    for col in row:
-                        value = col.value
-                        if value != None:
-                            if isinstance(value, (int, float, long)):
-                                value = unicode(value)
-                                for kv in cors:
-                                    value = value.replace(kv["from"],kv["to"])
-                            elif not isinstance(value, str):
-                                for kv in cors:
-                                    value = value.replace(kv["from"],kv["to"])
-                            new_output.append(value)
-                            col.value = value
-                wb.save(converted_filename)
+                if not isinstance(kwargs["path"], type(None)):
+                    paths = kwargs["path"].split(",")
+                    for path in paths:
+                        for row in ws:
+                            for col in row:
+                                if col.value != None:
+                                    value = col.value
+                                    if isinstance(value, (int, float, long)):
+                                        value = unicode(value)
+                                    if col.column == path:
+                                            for kv in cors:
+                                                value = value.replace(kv["from"],kv["to"])
+                                    new_output.append(value)
+                                    col.value = value
+                        wb.save(converted_filename)
+                else:
+                     for row in ws:
+                        for col in row:
+                            value = col.value
+                            if value != None:
+                                if isinstance(value, (int, float, long)):
+                                    value = unicode(value)
+                                    for kv in cors:
+                                        value = value.replace(kv["from"],kv["to"])
+                                elif not isinstance(value, str):
+                                    for kv in cors:
+                                        value = value.replace(kv["from"],kv["to"])
+                                new_output.append(value)
+                                col.value = value
+                        wb.save(converted_filename)
             else:
                 for row in ws:
                     for col in row:
