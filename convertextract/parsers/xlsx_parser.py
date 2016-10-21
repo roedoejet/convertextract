@@ -30,7 +30,7 @@ class Parser(BaseParser):
                                     value = col.value
                                     if isinstance(value, (int, float, long)):
                                         value = unicode(value)
-                                    if col.column == path:
+                                    if col.column == path.upper():
                                             for kv in cors:
                                                 value = value.replace(kv["from"],kv["to"])
                                     new_output.append(value)
