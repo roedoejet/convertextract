@@ -25,6 +25,14 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
     """
+    
+    # make sure optional kwargs are None is not supplied
+    if not "language" in kwargs:
+        kwargs["language"] = None
+    
+    if not "path" in kwargs:
+        kwargs["path"] = None
+    
     # make sure the filename exists
     if not os.path.exists(filename):
         raise exceptions.MissingFileError(filename)
