@@ -1,3 +1,6 @@
+* Version 1.0.8 & 1.0.9
+  * Fixed correspondence path for server deployment
+
 * Version 1.0.7
   * Fixed script kwargs issue 
 
