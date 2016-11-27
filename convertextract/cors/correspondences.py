@@ -22,7 +22,7 @@ class Correspondence():
                 wb = load_workbook(language)
                 ws = wb.active
             else:
-                file_name = this_dir + "\\" + "correspondence_spreadsheets" + "\\" + language + ".xlsx"
+                file_name = os.path.join(this_dir, "correspondence_spreadsheets", language, ".xlsx")
                 wb = load_workbook(file_name)
                 ws = wb.active
 
@@ -43,7 +43,7 @@ class Correspondence():
                         if type(value) == long or float or int:
                             value = unicode(value)
                         newCor["from"] = value
-                    cor_list.append(newCor)
+                cor_list.append(newCor)
 
             self.cor_list = cor_list
 
