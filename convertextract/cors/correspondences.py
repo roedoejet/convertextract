@@ -22,7 +22,8 @@ class Correspondence():
                 wb = load_workbook(language)
                 ws = wb.active
             else:
-                file_name = os.path.join(this_dir, "correspondence_spreadsheets", language, ".xlsx")
+                languageXLSX = language + ".xlsx"
+                file_name = os.path.join(this_dir, "correspondence_spreadsheets", languageXLSX)
                 wb = load_workbook(file_name)
                 ws = wb.active
 
