@@ -1,5 +1,11 @@
+* Version 1.2
+  * Fixed a silly issue causing pptx conversions to take far too long, they are faster now.
+  * Revised txt_parser error with new line breaks
+  * Revised docx conversions to allow for pictures to be preserved
+ 
 * Version 1.1
   * Fixed txt_parser error with new line breaks. First release of stable version.
+  
 * Version 1.0.8 & 1.0.9
   * Fixed correspondence path for server deployment
 
