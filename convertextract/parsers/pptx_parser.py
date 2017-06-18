@@ -28,7 +28,10 @@ class Parser(BaseParser):
                         # Add font attributes
                         font = run.font
                         bold_attr = font.bold
-                        color_attr = font.color.rgb if font.color.type != None else None
+                        try:
+                            color_attr = font.color.rgb if font.color.type != None else None
+                        except:
+                            pass
                         italic_attr = font.italic
                         name_attr = font.name
                         size_attr = font.size
@@ -51,9 +54,11 @@ class Parser(BaseParser):
                         # Add attributes
                         new_run.font.bold = bold_attr
                         
-                        if color_attr != None:
+                        try:
                             new_run.font.color.rgb = color_attr
-                        
+                        except:
+                            pass
+
                         new_run.font.italic = italic_attr
                         new_run.font.name = name_attr
                         new_run.font.size = size_attr
@@ -62,5 +67,5 @@ class Parser(BaseParser):
                         text_runs.append(a)
                         
                         # Save new presentation
-                        presentation.save(converted_filename)
+        presentation.save(converted_filename)
         return '\n\n'.join(text_runs)

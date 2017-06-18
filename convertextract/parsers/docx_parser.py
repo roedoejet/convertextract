@@ -13,24 +13,19 @@ class Parser(BaseParser):
         if not isinstance(kwargs["language"], type(None)):
             cors = processCors(kwargs["language"]).cor_list
             cors.sort(key=lambda x: len(x["from"]), reverse=True)
-            
-        text = ""
+
         document = docx.Document(filename)
         all_text = ""
         for paragraph in document.paragraphs:
-            paragraph_format = paragraph.paragraph_format
             for run in paragraph.runs:
-                a = run.text
-                font_prop = run.font.bold
                 if not isinstance(kwargs["language"], type(None)):
-                    for kv in cors:
-                        a = a.replace(kv["from"],kv["to"])
-                run.text = ""
-                new_run = paragraph.add_run()
-                new_run.text = a
-                new_run.font.bold = font_prop
-                all_text += '\n\n' + a
-            document.save(converted_filename)
+                    # this line prevents images from being erased
+                    if run.text != "" and run.text != " ":
+                        for kv in cors:
+                            processed = run.text.replace(kv["from"],kv["to"])
+                            run.text = processed
+                            # run.font.name = "Times New Roman" # for specifying output font
+        document.save(converted_filename)
             
 #       **NEEDS WORK**
 #        # Extract text from root paragraphs.
