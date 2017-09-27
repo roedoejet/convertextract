@@ -1,9 +1,11 @@
 * Version 1.2.2
-  * Fiexed a typo for xlsx parser
-
+  * Fixed a typo for xlsx parser
+  
+* Version 1.2.1
+  * Fixed a typo in PyPi submitted version 1.2
+  
 * Version 1.2
   * Fixed a silly issue causing pptx conversions to take far too long, they are faster now.
-  * Revised txt_parser error with new line breaks
   * Revised docx conversions to allow for pictures to be preserved
  
 * Version 1.1
