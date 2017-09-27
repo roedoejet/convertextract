@@ -31,26 +31,26 @@ class Parser(BaseParser):
                                     if isinstance(value, (int, float, long)):
                                         value = unicode(value)
                                     if col.column == path.upper():
-                                            for kv in cors:
-                                                value = value.replace(kv["from"],kv["to"])
+                                        for kv in cors:
+                                            value = value.replace(kv["from"], kv["to"])
                                     new_output.append(value)
                                     col.value = value
-                        wb.save(converted_filename)
+                    wb.save(converted_filename)
                 else:
-                     for row in ws:
+                    for row in ws:
                         for col in row:
                             value = col.value
                             if value != None:
                                 if isinstance(value, (int, float, long)):
                                     value = unicode(value)
                                     for kv in cors:
-                                        value = value.replace(kv["from"],kv["to"])
+                                        value = value.replace(kv["from"], kv["to"])
                                 elif not isinstance(value, str):
                                     for kv in cors:
-                                        value = value.replace(kv["from"],kv["to"])
+                                        value = value.replace(kv["from"], kv["to"])
                                 new_output.append(value)
                                 col.value = value
-                        wb.save(converted_filename)
+                    wb.save(converted_filename)
             else:
                 for row in ws:
                     for col in row:
