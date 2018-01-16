@@ -20,7 +20,7 @@ class ExtensionNotSupported(CommandLineError):
         return self.render((
             'The filename extension %(ext)s is not yet supported by\n'
             'textract. Please suggest this filename extension here:\n\n'
-            '    https://github.com/deanmalmgren/textract/issues\n'
+            '    https://github.com/roedoejet/convertextract/issues\n'
         ))
     
 class CorrespondenceMissing(CommandLineError):
@@ -31,7 +31,7 @@ class CorrespondenceMissing(CommandLineError):
         return self.render((
             'There is no correspondence with the name "%(language)s", please\n'
             'make sure you spelled the name correctly or go to\n'
-            'www.****.com for a list of correspondences'
+            'https://github.com/roedoejet/convertextract/ for a list of correspondences'
         ))
 
 
@@ -46,7 +46,7 @@ class MissingFileError(CommandLineError):
     def __str__(self):
         return self.render((
             'The file "%(filename)s" can not be found.\n'
-            'Is this the right path/to/file/you/want/to/extract%(ext)s?'
+            'Is this the right path/to/file/you/want/to/convert%(ext)s?'
         ))
 
 
@@ -82,7 +82,7 @@ class ShellError(CommandLineError):
             "The command `%(command)s` failed because the executable\n"
             "`%(executable)s` is not installed on your system. Please make\n"
             "sure the appropriate dependencies are installed before using\n"
-            "textract:\n\n"
+            "convertextract:\n\n"
             "    http://textract.readthedocs.org/en/latest/installation.html\n"
         ) % vars(self)
 

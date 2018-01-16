@@ -24,7 +24,7 @@ class Parser(BaseParser):
                         for kv in cors:
                             processed = run.text.replace(kv["from"],kv["to"])
                             run.text = processed
-                            # run.font.name = "Times New Roman" # for specifying output font
+                            run.font.name = "Times New Roman" # for specifying output font
         document.save(converted_filename)
             
 #       **NEEDS WORK**

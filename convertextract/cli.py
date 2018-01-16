@@ -59,7 +59,7 @@ def get_parser():
         '-l', '--language', type=str,
         help='Specify language for conversion. Can be either user defined'
              ' in the form of a path to an xlsx or from a predefined correspondence'
-            ' list. For a full list please visit www.****.com',
+            ' list. For a full list please visit https://github.com/roedoejet/convertextract/',
     )
     parser.add_argument(
         '-p', '--path', type=str,

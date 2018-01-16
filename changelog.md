@@ -1,3 +1,8 @@
+* Version 1.3
+  * Fixed an issue with pptx not preserving underlines.
+  * Updated URL in warning messages
+  * Fixed package includes for default correspondences
+
 * Version 1.2.2
   * Fixed a typo for xlsx parser
   
