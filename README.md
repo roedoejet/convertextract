@@ -55,7 +55,7 @@ convertextract path/to/foo.docx -l heiltsuk_duolos
 convertextract path/to/foo.docx -l heiltsuk_times
 ```
 
-* Ts'ilhqot'in Duolos Font -> Unicode
+* Tsilhqot'in Duolos Font -> Unicode
 ```{r, engine='python', count_lines}
 convertextract path/to/foo.docx -l tssilhqut-in_duolos
 ```
