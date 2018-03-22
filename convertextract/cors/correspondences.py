@@ -32,19 +32,59 @@ class Correspondence():
 
             # Loop through rows in worksheet, create if statements for different columns and append Cors to cor_list.
             for entry in ws:
-                newCor = {}
+                newCor = {"from": "", "to": "", "before": "", "after": ""}
                 for col in entry:
                     if col.column == 'A':
                         value = col.value
                         if type(value) == long or float or int:
                             value = unicode(value)
-                        newCor["to"] = value
+                        newCor["from"] = value
                     if col.column == 'B':
                         value = col.value
                         if type(value) == long or float or int:
                             value = unicode(value)
-                        newCor["from"] = value
+                        newCor["to"] = value
+                    if col.column == 'C':
+                        if col.value is not None:
+                            value = col.value
+                            if type(value) == long or float or int:
+                                value = unicode(value)
+                            newCor["before"] = value
+                    if col.column == 'D':
+                        if col.value is not None:
+                            value = col.value
+                            if type(value) == long or float or int:
+                                value = unicode(value)
+                            newCor["after"] = value
                 cor_list.append(newCor)
 
+            # Add match pattern regular expression
+            for cor in cor_list:
+                cor["match_pattern"] = self.rule_to_regex(cor)
+
+            # preserve rule ordering with regex, then apply context free changes from largest to smallest
+            context_sensitive_rules = filter(lambda x: x["before"] != "" or x["after"] != "", cor_list)
+            context_free_rules = filter(lambda x: x["before"] == "" and x["after"] == "", cor_list)
+            context_free_rules.sort(key=lambda x: len(x["from"]), reverse=True)
+            cor_list = context_sensitive_rules + context_free_rules
             self.cor_list = cor_list
+    
+    def rule_to_regex(self, rule):
+        if rule['before'] is not None:
+            before = rule["before"]
+        else:
+            before = ''
+        if rule['after'] is not None:
+            after = rule["after"]
+        else:
+            after = ''
+        fromMatch = rule["from"]
+        ruleRX = re.compile(before + fromMatch + after)
+        return ruleRX    
+
+    def apply_rules(self, to_parse):
+        for cor in self.cor_list:
+            if re.search(cor["match_pattern"], to_parse):
+                to_parse = re.sub(cor["from"], cor["to"], to_parse)
+        return to_parse
 

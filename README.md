@@ -33,11 +33,11 @@ Will produce a new file `path/to/foo_converted.docx` which will contain the same
 #### Creating an .xlsx correspondence sheet
 Your correspondence sheet must be set up as follows:
 
-|    replace with    |  find           |
+|    from   |  to           |
 |:-:|:-:|
-| å| aa|
-| ø| oe|
-| æ| ae|
+| aa| å| 
+| oe| ø|
+| ae| æ|
 
 Here, this correspondence sheet (do not include headers like "replace with" or "find") would replace all instances of aa, oe, or ae in a given file with å, ø, or æ respectively.
 
@@ -59,6 +59,24 @@ convertextract path/to/foo.docx -l heiltsuk_times
 ```{r, engine='python', count_lines}
 convertextract path/to/foo.docx -l tssilhqut-in_duolos
 ```
+
+#### Using Regular Expressions
+
+As of Version 1.5, there is support for Regular Expressions. If you do not need to use context-sensitive conversions, you do not need to include them. However, if you do, you should set up your correspondence sheet as follows:
+
+|    from   |  to  |  before | after |
+|:-:|:-:|:-:|:-:|
+| aa| å|[k,d]|$| 
+| aa| æ|t|$|
+| aa| a:|||
+
+Context-sensitive conversions (conversions using Regular Expressions) will be performed first, in the order they are declared in your correspondence sheet. Then, context-free substitutions will be performed. In the above example: 
+
+`kaa -> kå`
+`taa -> tæ`
+`kaat -> ka:t`
+
+Please note that some regular expressions will not work well with Microsoft Office documents. For example white spaces `\s` are not reliable because MS Office documents commonly split text runs on whitespaces. It is recommended that if you are using regular expressions to be vigilant in checking your data that the proper conversions were performed. 
 
 #### Use as Python package
 You can use the package in a Python script, which returns converted text, but without formatting. Running the script will still create a `foo_converted.docx` file.

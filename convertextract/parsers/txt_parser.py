@@ -8,15 +8,14 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         if not isinstance(kwargs["language"], type(None)):
-            cors = processCors(kwargs["language"]).cor_list
-            cors.sort(key=lambda x: len(x["from"]), reverse=True)
+            cors = processCors(kwargs["language"])
             f = codecs.open(filename, 'r', 'utf-8')
             all_text = ""
             lines = f.readlines()
             new_lines = []
             for line in lines:
-                for kv in cors:
-                    line = line.replace(kv["from"],kv["to"])
+                processed = cors.apply_rules(line)
+                line = processed
                 new_lines.append(line)
                 all_text += line
                 

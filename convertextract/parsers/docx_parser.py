@@ -11,8 +11,7 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
         converted_filename = filename[:-5] + '_converted.docx'
         if not isinstance(kwargs["language"], type(None)):
-            cors = processCors(kwargs["language"]).cor_list
-            cors.sort(key=lambda x: len(x["from"]), reverse=True)
+            cors = processCors(kwargs["language"])
 
         document = docx.Document(filename)
         all_text = ""
@@ -21,10 +20,9 @@ class Parser(BaseParser):
                 if not isinstance(kwargs["language"], type(None)):
                     # this line prevents images from being erased
                     if run.text != "" and run.text != " ":
-                        for kv in cors:
-                            processed = run.text.replace(kv["from"],kv["to"])
-                            run.text = processed
-                            run.font.name = "Times New Roman" # for specifying output font
+                        processed = cors.apply_rules(run.text)
+                        run.text = processed
+                        run.font.name = "Times New Roman" # for specifying output font
         document.save(converted_filename)
             
 #       **NEEDS WORK**

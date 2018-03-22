@@ -11,8 +11,7 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
 
         if not isinstance(kwargs["language"], type(None)):
-            cors = processCors(kwargs["language"]).cor_list
-            cors.sort(key=lambda x: len(x["from"]), reverse=True)
+            cors = processCors(kwargs["language"])
 
         converted_filename = filename[:-5] + '_converted.pptx'
         presentation = pptx.Presentation(filename)
@@ -26,13 +25,11 @@ class Parser(BaseParser):
                     for run in paragraph.runs:
                     
                         # Convert text
-                        a = run.text
                         if not isinstance(kwargs["language"], type(None)):
-                            for kv in cors:
-                                a = a.replace(kv["from"],kv["to"])
-                        
+                            processed = cors.apply_rules(run.text)
+                            
                         # Replace old text
-                        run.text = a
+                        run.text = processed
                         run.font.name = "Times New Roman"
                         
                         # Save new presentation

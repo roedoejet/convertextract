@@ -1,3 +1,7 @@
+* Version 1.5
+  * Added Regex support for .txt, .docx, .pptx and .xlsx conversions
+  * Breaking change: correspondence charts must now be ordered with the character to convert **from** in **column A** and the character to convert **to** in **column B**
+
 * Version 1.3
   * Fixed an issue with pptx not preserving underlines.
   * Updated URL in warning messages
