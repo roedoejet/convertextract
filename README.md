@@ -45,9 +45,9 @@ Here, this correspondence sheet (do not include headers like "replace with" or "
 
 As of Version 1.0.4, the following conversions are supported:
 
-* Heiltsuk Duolos Font -> Unicode
+* Heiltsuk Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l heiltsuk_duolos
+convertextract path/to/foo.docx -l heiltsuk_Doulos
 ```
 
 * Heiltsuk Times Font -> Unicode
@@ -55,9 +55,9 @@ convertextract path/to/foo.docx -l heiltsuk_duolos
 convertextract path/to/foo.docx -l heiltsuk_times
 ```
 
-* Tsilhqot'in Duolos Font -> Unicode
+* Tsilhqot'in Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l tssilhqut-in_duolos
+convertextract path/to/foo.docx -l tssilhqut-in_Doulos
 ```
 
 #### Using Regular Expressions
