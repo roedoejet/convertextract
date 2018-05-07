@@ -1,3 +1,7 @@
+* Version 1.6
+  * Added support for feeding edge case https://medium.com/digital-linguistics/transliteration-in-javascript-99d306996752
+  * Note: this solution will cause problems for documents that contain characters in the geometric shapes code block: Hex 25A0-25FF.
+
 * Version 1.5.1
   * Fixed typo from Duolos to Doulos
 

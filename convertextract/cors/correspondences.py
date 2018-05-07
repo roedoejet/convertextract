@@ -9,9 +9,10 @@ from openpyxl.styles import Font, Fill, Color
 from openpyxl.cell import Cell
 from .. import exceptions
 import re
+import random
 
 
-# _*_ coding:utf-8 _*_
+# _*_ coding: utf-8 _*_
 class Correspondence():
     
     def __init__(self, language):
@@ -62,6 +63,19 @@ class Correspondence():
             for cor in cor_list:
                 cor["match_pattern"] = self.rule_to_regex(cor)
 
+            
+            # To prevent feeding
+            for cor in cor_list:
+                # if output exists as input for another cor
+                if cor['to'] in [temp_cor['from'] for temp_cor in cor_list]:
+                    # assign a random, unique character as a temporary value. this could be more efficient
+                    random_char = u"\\u%04x" % random.randrange(9632, 9727)
+                    # make sure character is unique
+                    if [temp_char for temp_char in cor_list if 'temp' in temp_char.keys()]:
+                        while random_char.decode('unicode-escape') in [temp_char['temp'] for temp_char in cor_list if 'temp' in temp_char.keys()]:
+                            random_char = u"\\%04x" % random.randrange(9632, 9727)
+                    cor['temp'] = random_char.decode('unicode-escape')
+
             # preserve rule ordering with regex, then apply context free changes from largest to smallest
             context_sensitive_rules = filter(lambda x: x["before"] != "" or x["after"] != "", cor_list)
             context_free_rules = filter(lambda x: x["before"] == "" and x["after"] == "", cor_list)
@@ -85,6 +99,20 @@ class Correspondence():
     def apply_rules(self, to_parse):
         for cor in self.cor_list:
             if re.search(cor["match_pattern"], to_parse):
-                to_parse = re.sub(cor["from"], cor["to"], to_parse)
+                # if a temporary value was assigned
+                if 'temp' in cor.keys():
+                    # turn the original value into the temporary one
+                    to_parse = re.sub(cor["from"], cor["temp"], to_parse)
+                else:
+                    # else turn it into the final value
+                    to_parse = re.sub(cor["from"], cor["to"], to_parse)
+        # transliterate temporary values
+        for cor in self.cor_list:
+            # transliterate temp value to final value if it exists, otherwise pass
+            try:
+                if cor['temp'] and re.search(cor['temp'], to_parse):
+                    to_parse = re.sub(cor['temp'], cor['to'], to_parse)
+            except KeyError:
+                pass
         return to_parse
 
