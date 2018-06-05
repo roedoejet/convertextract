@@ -6,6 +6,7 @@ import os
 import importlib
 
 from .. import exceptions
+from ..cors import processCors
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -62,3 +63,17 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     filetype_module = importlib.import_module(rel_module, 'convertextract.parsers')
     parser = filetype_module.Parser()
     return parser.process(filename, encoding, **kwargs)
+
+def processText(text, **kwargs):
+    """This is a basic function that takes some text as input and 
+    transliterates based on the provided transliteration scheme
+    """
+
+    # make sure optional kwargs are None is not supplied
+    if not "language" in kwargs:
+        kwargs["language"] = None
+
+    cors = processCors(kwargs["language"])
+
+    return cors.apply_rules(text)
+    
