@@ -1,12 +1,17 @@
 # convertextract
 ========
 
+[![Build Status](https://travis-ci.org/roedoejet/textract.svg?branch=master)](https://travis-ci.org/roedoejet/textract)
+[![Version](https://img.shields.io/pypi/v/convertextract.svg)](https://warehouse.python.org/project/convertextract/)
+[![Coverage Status](https://coveralls.io/repos/github/roedoejet/textract/badge.svg?branch=master)](https://coveralls.io/github/roedoejet/textract?branch=master)
+
+
 Extract and find/replace text based on arbitrary correspondences. This library is a fork from the Textract library by Dean Malmgren. https://github.com/deanmalmgren/textract
 
 # Documentation
 
 ## Installation
-To install, you must have Python 2.7 and pip installed.
+To install, you must have Python 2.7 or 3.4+ and pip installed.
 ```{r, engine='python', count_lines}
 pip install convertextract
 ```
@@ -16,7 +21,7 @@ Some source libraries need to be installed for different operating systems to su
 
 ## Basic CLI Use
 
-Basic Textract functions are preserved. Please visit <http://textract.readthedocs.org> for documentation.
+Some basic Textract functions are preserved. Please visit <http://textract.readthedocs.org> for documentation.
 
 #### Converting a file based on xlsx
 convertextract requires two arguments:
@@ -43,11 +48,11 @@ Here, this correspondence sheet (do not include headers like "replace with" or "
 
 #### Supported conversions
 
-As of Version 1.0.4, the following conversions are supported:
+As of Version 2.0, the following conversions are supported:
 
 * Heiltsuk Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l heiltsuk_Doulos
+convertextract path/to/foo.docx -l heiltsuk_doulos
 ```
 
 * Heiltsuk Times Font -> Unicode
@@ -57,7 +62,12 @@ convertextract path/to/foo.docx -l heiltsuk_times
 
 * Tsilhqot'in Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l tssilhqut-in_Doulos
+convertextract path/to/foo.docx -l tssilhqut-in_doulos
+```
+
+* Navajo Times Font -> Unicode
+```{r, engine='python', count_lines}
+convertextract path/to/foo.docx -l navajo_times
 ```
 
 #### Using Regular Expressions

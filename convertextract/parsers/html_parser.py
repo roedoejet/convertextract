@@ -1,4 +1,5 @@
 import re
+import six
 
 from bs4 import BeautifulSoup
 
@@ -28,7 +29,7 @@ class Parser(BaseParser):
         """
         if element.name in self._disallowed_names:
             return False
-        elif re.match(u'<!--.*-->', unicode(element.extract())):
+        elif re.match(u'<!--.*-->', six.text_type(element.extract())):
             return False
         return True
 
@@ -45,7 +46,7 @@ class Parser(BaseParser):
         """
         text = ''
         if tag is not None:
-            text = str(tag).decode('utf-8')
+            text = six.text_type(tag)
             text = re.sub(r'(<[^>]+>)', '', text)
             text = re.sub(r'\s', ' ', text)
             text = text.strip()
@@ -124,7 +125,7 @@ class Parser(BaseParser):
         return soup
 
     def extract(self, filename, **kwargs):
-        with open(filename) as stream:
+        with open(filename, "rb") as stream:
             soup = BeautifulSoup(stream, 'lxml')
 
         # Convert tables to ASCII ones

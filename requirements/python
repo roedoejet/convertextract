@@ -1,13 +1,11 @@
-# This file contains all python dependencies that are required by the
-# convertextract package in order for it to properly work
-argcomplete
-chardet
-python-pptx>=0.5.1
-python-docx
-pdfminer==20140328
-beautifulsoup4
-xlrd
+# This file contains all python dependencies that are required by the textract
+# package in order for it to properly work.
+
+argcomplete==1.8.2
+chardet==3.0.4
+python-pptx==0.6.6
+beautifulsoup4==4.6.0
+python-docx==0.8.6
+xlrd==1.0.0
 openpyxl
-EbookLib
-SpeechRecognition>=3.1.0
-https://github.com/mattgwwalker/msg-extractor/zipball/master
+six==1.10.0

@@ -1,3 +1,8 @@
+* Version 2.0
+  * Migrated to Python 3
+  * Added processText method for processing of plain text
+  * Added --no-write argument
+
 * Version 1.6
   * Added support for feeding edge case https://medium.com/digital-linguistics/transliteration-in-javascript-99d306996752
   * Note: this solution will cause problems for documents that contain characters in the geometric shapes code block: Hex 25A0-25FF.

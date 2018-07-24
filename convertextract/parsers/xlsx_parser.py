@@ -1,8 +1,7 @@
-import xlrd
-from openpyxl import load_workbook 
-from openpyxl.styles import Font, Fill, Color
-from openpyxl.cell import Cell
+from openpyxl import load_workbook
+import six
 
+from six.moves import xrange
 
 from .utils import BaseParser
 from ..cors import processCors
@@ -13,49 +12,27 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        converted_filename = filename[:-5] + '_converted.xlsx'
-        wb = load_workbook(filename)
-        new_output = []
-        output = ""
-        for ws in wb:
-            if not isinstance(kwargs["language"], type(None)):
-                cors = processCors(kwargs["language"])
-                if not isinstance(kwargs["path"], type(None)):
-                    paths = kwargs["path"].split(",")
-                    for path in paths:
-                        for row in ws:
-                            for col in row:
-                                if col.value != None:
-                                    value = col.value
-                                    if isinstance(value, (int, float, long)):
-                                        value = unicode(value)
-                                    if col.column == path.upper():
-                                        processed = cors.apply_rules(value)
-                                    new_output.append(processed)
-                                    col.value = processed
-                    wb.save(converted_filename)
-                else:
-                    for row in ws:
-                        for col in row:
-                            value = col.value
-                            if value != None:
-                                if isinstance(value, (int, float, long)):
-                                    value = unicode(value)
-                                    processed = cors.apply_rules(value)
-                                elif not isinstance(value, str):
-                                    processed = cors.apply_rules(value)
-                                new_output.append(processed)
-                                col.value = processed
-                    wb.save(converted_filename)
-            else:
-                for row in ws:
-                    for col in row:
-                        value = col.value
-                        if isinstance(value, (int, float, long)):
-                            value = unicode(value)
-                        if value != None:
-                            new_output.append(value)
-
-        if new_output:
-            output += u' '.join(new_output) + u'\n'
+        if "language" in kwargs and kwargs['language']:
+            converted_filename = filename[:-5] + '_converted.xlsx'
+            cors = processCors(kwargs["language"])
+        workbook = load_workbook(filename)
+        sheet_names = workbook.worksheets
+        output = "\n"
+        for name in sheet_names:
+            worksheet = sheet_names[workbook.index(name)]
+            for row in worksheet:
+                new_output = []
+                for col in row:
+                    value = col.value
+                    if value:
+                        if isinstance(value, (int, float)):
+                            value = six.text_type(value)
+                        if "language" in kwargs and kwargs['language']:
+                            value = cors.apply_rules(value)
+                            col.value = value
+                        new_output.append(value)
+                if new_output:
+                    output += u' '.join(new_output) + u'\n'
+        if "language" in kwargs and kwargs["language"] and "no_write" in kwargs and not kwargs['no_write']:
+            workbook.save(converted_filename)
         return output

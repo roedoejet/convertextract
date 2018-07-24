@@ -37,25 +37,25 @@ class Correspondence():
                 for col in entry:
                     if col.column == 'A':
                         value = col.value
-                        if type(value) == long or float or int:
-                            value = unicode(value)
+                        if type(value) == float or int:
+                            value = str(value)
                         newCor["from"] = value
                     if col.column == 'B':
                         value = col.value
-                        if type(value) == long or float or int:
-                            value = unicode(value)
+                        if type(value) == float or int:
+                            value = str(value)
                         newCor["to"] = value
                     if col.column == 'C':
                         if col.value is not None:
                             value = col.value
-                            if type(value) == long or float or int:
-                                value = unicode(value)
+                            if type(value) == float or int:
+                                value = str(value)
                             newCor["before"] = value
                     if col.column == 'D':
                         if col.value is not None:
                             value = col.value
-                            if type(value) == long or float or int:
-                                value = unicode(value)
+                            if type(value) == float or int:
+                                value = str(value)
                             newCor["after"] = value
                 cor_list.append(newCor)
 
@@ -69,16 +69,17 @@ class Correspondence():
                 # if output exists as input for another cor
                 if cor['to'] in [temp_cor['from'] for temp_cor in cor_list]:
                     # assign a random, unique character as a temporary value. this could be more efficient
-                    random_char = u"\\u%04x" % random.randrange(9632, 9727)
+                    random_char = chr(random.randrange(9632, 9727))
                     # make sure character is unique
-                    if [temp_char for temp_char in cor_list if 'temp' in temp_char.keys()]:
-                        while random_char.decode('unicode-escape') in [temp_char['temp'] for temp_char in cor_list if 'temp' in temp_char.keys()]:
-                            random_char = u"\\%04x" % random.randrange(9632, 9727)
-                    cor['temp'] = random_char.decode('unicode-escape')
+                    if [temp_char for temp_char in cor_list if 'temp' in list(temp_char.keys())]:
+                        while random_char in [temp_char['temp'] for temp_char in cor_list if 'temp' in list(temp_char.keys())]:
+                            random_char = chr(random.randrange(9632, 9727))
+                    cor['temp'] = random_char
 
             # preserve rule ordering with regex, then apply context free changes from largest to smallest
-            context_sensitive_rules = filter(lambda x: x["before"] != "" or x["after"] != "", cor_list)
-            context_free_rules = filter(lambda x: x["before"] == "" and x["after"] == "", cor_list)
+            # context_sensitive_rules = filter(lambda x: x["before"] != "" or x["after"] != "", cor_list)
+            context_sensitive_rules = [x for x in cor_list if (x['before'] != '' or x['after'] != "")]
+            context_free_rules = [x for x in cor_list if x['before'] == "" and x["after"] == ""]
             context_free_rules.sort(key=lambda x: len(x["from"]), reverse=True)
             cor_list = context_sensitive_rules + context_free_rules
             self.cor_list = cor_list
@@ -93,24 +94,35 @@ class Correspondence():
         else:
             after = ''
         fromMatch = rule["from"]
-        ruleRX = re.compile(before + fromMatch + after)
+        try:
+            ruleRX = re.compile(before + fromMatch + after)
+        except:
+            raise Exception('Your regex is malformed. Escape all regular expression special characters in your conversion table.')
         return ruleRX    
 
     def apply_rules(self, to_parse):
         for cor in self.cor_list:
+            # print('first')
             if re.search(cor["match_pattern"], to_parse):
                 # if a temporary value was assigned
-                if 'temp' in cor.keys():
+                if 'temp' in list(cor.keys()):
                     # turn the original value into the temporary one
+                    # print("turned orig value " + cor['from'] + " to temp " + cor["temp"])
                     to_parse = re.sub(cor["from"], cor["temp"], to_parse)
                 else:
                     # else turn it into the final value
+                    # print("turned orig value " + cor['from'] + " to final " + cor["to"])
+                    # print(to_parse)
                     to_parse = re.sub(cor["from"], cor["to"], to_parse)
+                    # print(to_parse)
+        # print(to_parse)
         # transliterate temporary values
         for cor in self.cor_list:
+            # print('second')
             # transliterate temp value to final value if it exists, otherwise pass
             try:
                 if cor['temp'] and re.search(cor['temp'], to_parse):
+                    # print("turned temp " + cor['temp'] + " to final " + cor["to"])
                     to_parse = re.sub(cor['temp'], cor['to'], to_parse)
             except KeyError:
                 pass

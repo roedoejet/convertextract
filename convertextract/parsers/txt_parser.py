@@ -1,5 +1,3 @@
-import os
-import codecs
 from .utils import BaseParser
 from ..cors import processCors
 
@@ -7,25 +5,16 @@ class Parser(BaseParser):
     """Parse ``.txt`` files"""
 
     def extract(self, filename, **kwargs):
-        if not isinstance(kwargs["language"], type(None)):
-            cors = processCors(kwargs["language"])
-            f = codecs.open(filename, 'r', 'utf-8')
-            all_text = ""
-            lines = f.readlines()
-            new_lines = []
-            for line in lines:
-                processed = cors.apply_rules(line)
-                line = processed
-                new_lines.append(line)
-                all_text += line
-                
-        # write to new file
-            converted_filename = filename[:-4] + '_converted.txt'
-            textfile = codecs.open(converted_filename,'w', 'utf-8')
-            textfile.writelines(new_lines)
-            textfile.close()
-        else:    
-            with open(filename) as stream:
-                all_text = stream.read()
-            
-        return all_text
+        converted_filename = filename[:-4] + '_converted.txt'
+        with open(filename, 'r', encoding='utf8') as stream:
+            text = stream.read()
+        if "language" in kwargs and kwargs['language']:
+            self.cors = processCors(kwargs["language"])
+            text = self.cors.apply_rules(text)
+
+            if "language" in kwargs and kwargs["language"] and "no_write" in kwargs and not kwargs['no_write']:
+                textfile = open(converted_filename, 'w', encoding='utf-8')
+                textfile.write(text)
+                textfile.close()
+                        
+        return text

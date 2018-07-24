@@ -1,4 +1,3 @@
-# _*_ coding:utf-8 _*_
 import docx
 
 from .utils import BaseParser
@@ -9,45 +8,19 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        converted_filename = filename[:-5] + '_converted.docx'
-        if not isinstance(kwargs["language"], type(None)):
+        if "language" in kwargs and kwargs["language"]:
+            converted_filename = filename[:-5] + '_converted.docx'
             cors = processCors(kwargs["language"])
 
         document = docx.Document(filename)
-        all_text = ""
+        text_runs = []
         for paragraph in document.paragraphs:
             for run in paragraph.runs:
-                if not isinstance(kwargs["language"], type(None)):
+                if "language" in kwargs and kwargs['language']:
                     # this line prevents images from being erased
                     if run.text != "" and run.text != " ":
-                        processed = cors.apply_rules(run.text)
-                        run.text = processed
-                        run.font.name = "Times New Roman" # for specifying output font
-        document.save(converted_filename)
-            
-#       **NEEDS WORK**
-#        # Extract text from root paragraphs.
-#        text += '\n\n'.join([
-#            paragraph.text for paragraph in document.paragraphs
-#        ])
-#
-#        # Recursively extract text from root tables.
-#        for table in document.tables:
-#            text += '\n\n' + self._parse_table(table)
-
-        return all_text
-
-    def _parse_table(self, table):
-        text = ''
-        for row in table.rows:
-            for cell in row.cells:
-                # For every cell in every row of the table, extract text from
-                # child paragraphs.
-                for paragraph in cell.paragraphs:
-                    text += '\n\n' + paragraph.text
-
-                # Then recursively extract text from child tables.
-                for table in cell.tables:
-                    text += self._parse_table(table)
-
-        return text
+                        run.text = cors.apply_rules(run.text)
+                        text_runs.append(run.text)
+        if "language" in kwargs and kwargs["language"] and "no_write" in kwargs and not kwargs['no_write']:
+            document.save(converted_filename)
+        return '\n\n'.join(text_runs)
