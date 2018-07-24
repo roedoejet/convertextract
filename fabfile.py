@@ -1,5 +1,6 @@
 from fabric.api import *
 from fabric.contrib.console import confirm
+from convertextract import VERSION
 
 def pack():
     # build the package
@@ -13,7 +14,7 @@ def dev():
     pack()
 
     # reinstall
-    fn = "convertextract-" + "1.6.2" + ".tar.gz"
+    fn = "convertextract-" + VERSION + ".tar.gz"
     local('pip install dist/' + fn)
 
     # local('python run.py')
