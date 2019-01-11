@@ -4,7 +4,7 @@ import six
 from six.moves import xrange
 
 from .utils import BaseParser
-from ..cors import processCors
+from ..cors import Correspondence
 
 
 class Parser(BaseParser):
@@ -14,7 +14,7 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
         if "language" in kwargs and kwargs['language']:
             converted_filename = filename[:-5] + '_converted.xlsx'
-            cors = processCors(kwargs["language"])
+            cors = Correspondence(kwargs["language"], kwargs)
         workbook = load_workbook(filename)
         sheet_names = workbook.worksheets
         output = "\n"
@@ -33,6 +33,9 @@ class Parser(BaseParser):
                         new_output.append(value)
                 if new_output:
                     output += u' '.join(new_output) + u'\n'
-        if "language" in kwargs and kwargs["language"] and "no_write" in kwargs and not kwargs['no_write']:
-            workbook.save(converted_filename)
+        if "language" in kwargs and kwargs["language"]:
+            if "no_write" in kwargs and kwargs['no_write']:
+                pass
+            else:
+                workbook.save(converted_filename)
         return output

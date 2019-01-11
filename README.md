@@ -27,7 +27,7 @@ Some basic Textract functions are preserved. Please visit <http://textract.readt
 convertextract requires two arguments:
 
 1. A file containing text to convert (as of Version 1.0.4, this includes **.pptx**, **.docx**, **.xlsx**, and **.txt**)
-2. An **.xlsx** file containing the find/replace correspondences.
+2. An **.xlsx** file containing the find/replace correspondences. As of Version 2.0.1 you can also use either **.csv** files or feed a list of correspondences (as Python dicts) directly into the language keyword argument for either `process` or `processText`
 
 Running the comand:
 ```{r, engine='python', count_lines}
@@ -93,4 +93,11 @@ You can use the package in a Python script, which returns converted text, but wi
 ```python
 import convertextract
 text = convertextract.process('foo.docx', language='bar.xlsx')
+```
+
+You can also use convertextract to just convert text in Python using `processText`.
+
+```python
+import convertextract
+text = convertextract.processText('test', language=[{'from': 't', 'to': 'p', 'before': '^', 'after': 'e'}])
 ```

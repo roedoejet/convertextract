@@ -8,7 +8,7 @@ import glob
 import re
 
 from .. import exceptions
-from ..cors import processCors
+from ..cors import Correspondence
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -84,12 +84,14 @@ def processText(text, **kwargs):
     """This is a basic function that takes some text as input and 
     transliterates based on the provided transliteration scheme
     """
-
+    
     # make sure optional kwargs are None is not supplied
     if not "language" in kwargs:
         kwargs["language"] = None
 
-    cors = processCors(kwargs["language"])
+    language = kwargs["language"]
+    del kwargs["language"]
+    cors = Correspondence(language, **kwargs)
 
     return cors.apply_rules(text)
 

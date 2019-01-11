@@ -1,7 +1,7 @@
 import pptx
 
 from .utils import BaseParser
-from ..cors import processCors
+from ..cors import Correspondence
 
 
 class Parser(BaseParser):
@@ -11,7 +11,7 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
         if "language" in kwargs and kwargs['language']:
             converted_filename = filename[:-5] + '_converted.pptx'
-            cors = processCors(kwargs["language"])
+            cors = Correspondence(kwargs["language"], kwargs)
 
         presentation = pptx.Presentation(filename)
         text_runs = []
@@ -24,6 +24,9 @@ class Parser(BaseParser):
                         if "language" in kwargs and kwargs['language']:
                             run.text = cors.apply_rules(run.text)
                         text_runs.append(run.text)
-        if "language" in kwargs and kwargs["language"] and "no_write" in kwargs and not kwargs['no_write']:
-            presentation.save(converted_filename)
+        if "language" in kwargs and kwargs["language"]:
+            if "no_write" in kwargs and kwargs['no_write']:
+                pass
+            else:
+                presentation.save(converted_filename)
         return '\n\n'.join(text_runs)

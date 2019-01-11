@@ -1,3 +1,7 @@
+* Version 2.0.1
+  * Added ability to take csv or plain list as cors
+  * Fixed some problems with regex. Before columns are processed as positive lookbehinds, after columns are processed as positive lookaheads
+
 * Version 2.0
   * Migrated to Python 3
   * Added processText method for processing of plain text
