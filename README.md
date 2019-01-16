@@ -86,6 +86,14 @@ Context-sensitive conversions (conversions using Regular Expressions) will be pe
 `taa -> tæ`
 `kaat -> ka:t`
 
+As a peek under the hood, regular expressions are compiled as follows: 
+
+```python
+re.compile(f"(?<={before})" + from + f"(?={after})")
+``` 
+
+with the "before" values placed directly in a positive look behind, and the "after" context placed directly in a positive look ahead. The "from" value is what gets replaced by the "to" value. 
+
 Please note that some regular expressions will not work well with Microsoft Office documents. For example white spaces `\s` are not reliable because MS Office documents commonly split text runs on whitespaces. It is recommended that if you are using regular expressions to be vigilant in checking your data that the proper conversions were performed. 
 
 #### Use as Python package
