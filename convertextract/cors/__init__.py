@@ -59,8 +59,16 @@ class Correspondence(object):
            
             newCor['from'] = entry[0]
             newCor['to'] = entry[1]
-            newCor['before'] = entry[2]
-            newCor['after'] = entry[3]
+            try:
+                newCor['before'] = entry[2]
+            except IndexError:
+                newCor['before'] = ''
+
+            try:
+                newCor['after'] = entry[3]
+            except IndexError:
+                newCor['after'] = ''
+                
             for k in newCor:
                 if isinstance(newCor[k], float) or isinstance(newCor[k], int):
                     newCor[k] = str(newCor[k])
