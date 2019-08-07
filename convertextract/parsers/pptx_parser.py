@@ -1,18 +1,14 @@
 import pptx
 
 from .utils import BaseParser
-from ..cors import Correspondence
-
 
 class Parser(BaseParser):
     """Extract text from pptx file using python-pptx
     """
 
     def extract(self, filename, **kwargs):
-        if "language" in kwargs and kwargs['language']:
-            converted_filename = filename[:-5] + '_converted.pptx'
-            cors = Correspondence(kwargs["language"], kwargs)
-
+        converted_filename = filename[:-5] + '_converted.pptx'
+        transducer = self.get_transducer(kwargs.get('language', ''), kwargs.get('table', ''))
         presentation = pptx.Presentation(filename)
         text_runs = []
         for slide in presentation.slides:
@@ -22,11 +18,10 @@ class Parser(BaseParser):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
                         if "language" in kwargs and kwargs['language']:
-                            run.text = cors.apply_rules(run.text)
+                            run.text = transducer(run.text)
                         text_runs.append(run.text)
-        if "language" in kwargs and kwargs["language"]:
-            if "no_write" in kwargs and kwargs['no_write']:
-                pass
-            else:
-                presentation.save(converted_filename)
+        if "no_write" in kwargs and kwargs['no_write']:
+            pass
+        else:
+            presentation.save(converted_filename)
         return '\n\n'.join(text_runs)

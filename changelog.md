@@ -1,3 +1,8 @@
+* Version 2.5.0
+  * Uses external g2p library for transductions
+  * Breaking change: **from** is now labelled **in**, **to** is now labelled **out**, **after** is now labelled **context_after** and **before** is now labelled **context_before**
+  * Breaking change: custom tables can still be passed as a path with the `-l` flag, but all default languages are now from the g2p library and must be called with the language `-l` flag and an ISO code and the table `-t` flag and the name of the lookup table. Type `convertextract -h` for a list of available languages.
+  
 * Version 2.0.1
   * Added ability to take csv or plain list as cors
   * Fixed some problems with regex. Before columns are processed as positive lookbehinds, after columns are processed as positive lookaheads

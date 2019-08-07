@@ -9,3 +9,4 @@ python-docx==0.8.6
 xlrd==1.0.0
 openpyxl
 six==1.10.0
+g2p>=0.1

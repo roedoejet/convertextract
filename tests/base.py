@@ -7,8 +7,6 @@ import glob
 
 import requests
 
-from convertextract.cors import correspondence_spreadsheets as corsheets
-
 
 class GenericUtilities(object):
 
@@ -77,11 +75,6 @@ class BaseParserTestCase(GenericUtilities):
                 ) % locals())
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
-
-    def get_cors_names(self):
-        cor_sheet_paths = glob.glob(os.path.join(os.path.dirname(corsheets.__file__), "*.xlsx"))
-        heads_and_tails = [os.path.split(cor) for cor in cor_sheet_paths]
-        return [os.path.splitext(tail)[0] for (head,tail) in heads_and_tails]
         
     def download_file(self, url, filename):
         if not os.path.exists(filename):
@@ -109,10 +102,6 @@ class BaseParserTestCase(GenericUtilities):
     def unicode_text_filename(self):
         return self.get_filename(self.unicode_text_filename_root,
                                  "unicode_text")
-
-    @property
-    def languages_filenames(self):
-        return [self.get_filename(cor, '') for cor in self.get_cors_names()]
 
     # def test_raw_text_cli(self):
     #     """Make sure raw text matches from the command line"""

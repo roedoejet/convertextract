@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 
 from .utils import BaseParser
 
-
 class Parser(BaseParser):
     """Extract text from html file using beautifulsoup4. Filter text to
     only show the visible parts of the page. Insipration from `here

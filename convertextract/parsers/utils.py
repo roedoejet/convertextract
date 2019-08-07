@@ -6,6 +6,10 @@ import subprocess
 import tempfile
 import os
 import errno
+from typing import Union
+
+from g2p.mappings import Mapping
+from g2p.transducer import Transducer
 
 import six
 import chardet
@@ -65,7 +69,29 @@ class BaseParser(object):
         # use chardet to automatically detect the encoding text
         result = chardet.detect(text)
         return text.decode(result['encoding'])
-
+    
+    def get_transducer(self, lang: str, table: str):
+        if not lang and not table:
+            raise exceptions.CorrespondenceMissing(lang)
+        elif not lang:
+            try:
+                mapping = Mapping(lang)
+            except:
+                if not isinstance(lang, str) or not os.path.exists(lang):
+                    raise exceptions.CorrespondenceMissing(lang)
+                else:
+                    raise exceptions.MalformedCorrespondence(lang)
+        elif not table:
+            try:
+                mapping = Mapping(table)
+            except:
+                if not isinstance(table, str) or not os.path.exists(table):
+                    raise exceptions.CorrespondenceMissing(table)
+                else:
+                    raise exceptions.MalformedCorrespondence(table)
+        else:
+            mapping = Mapping(language={'lang': lang, 'table': table})
+        return Transducer(mapping)
 
 class ShellParser(BaseParser):
     """The :class:`.ShellParser` extends the :class:`.BaseParser` to make

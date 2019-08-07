@@ -47,6 +47,7 @@ setup(
     python_requires='>3.4',
     description="Arbitrary transliterations on Microsoft Office documents",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url=github_url,
     download_url="%s/archives/master" % github_url,
     author='Aidan Pine',
@@ -56,9 +57,7 @@ setup(
     include_package_data=True,
     packages=[
         'convertextract',
-        'convertextract.parsers',
-        'convertextract.cors',
-        'convertextract.cors.correspondence_spreadsheets'
+        'convertextract.parsers'
     ],
     install_requires=dependencies,
     dependency_links=dependency_links,

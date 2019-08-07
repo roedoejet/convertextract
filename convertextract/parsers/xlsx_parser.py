@@ -1,10 +1,7 @@
 from openpyxl import load_workbook
 import six
 
-from six.moves import xrange
-
 from .utils import BaseParser
-from ..cors import Correspondence
 
 
 class Parser(BaseParser):
@@ -12,9 +9,8 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        if "language" in kwargs and kwargs['language']:
-            converted_filename = filename[:-5] + '_converted.xlsx'
-            cors = Correspondence(kwargs["language"], kwargs)
+        converted_filename = filename[:-5] + '_converted.xlsx'
+        transducer = self.get_transducer(kwargs.get('language', ''), kwargs.get('table', ''))
         workbook = load_workbook(filename)
         sheet_names = workbook.worksheets
         output = "\n"
@@ -28,14 +24,13 @@ class Parser(BaseParser):
                         if isinstance(value, (int, float)):
                             value = six.text_type(value)
                         if "language" in kwargs and kwargs['language']:
-                            value = cors.apply_rules(value)
+                            value = transducer(value)
                             col.value = value
                         new_output.append(value)
                 if new_output:
                     output += u' '.join(new_output) + u'\n'
-        if "language" in kwargs and kwargs["language"]:
-            if "no_write" in kwargs and kwargs['no_write']:
-                pass
-            else:
-                workbook.save(converted_filename)
+        if "no_write" in kwargs and kwargs['no_write']:
+            pass
+        else:
+            workbook.save(converted_filename)
         return output

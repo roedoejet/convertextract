@@ -11,6 +11,8 @@ import six
 import re
 import glob
 
+from g2p.mappings.langs import LANGS_AVAILABLE, TABLES_AVAILABLE
+
 import argcomplete
 
 from . import VERSION
@@ -78,7 +80,13 @@ def get_parser():
     parser.add_argument('--no-write', dest='no_write', action='store_true', help="Disable default writing of converted file.")
     parser.add_argument(
         '-l', '--language', type=str,
-        help='Specify language for conversion. Can be either user defined'
+        choices=LANGS_AVAILABLE,
+        help='Specify language for conversion. For a full list please visit https://github.com/roedoejet/convertextract/',
+    )
+    parser.add_argument(
+        '-t', '--table', type=str,
+        choices=TABLES_AVAILABLE,
+        help='Specify lookup table for conversion. Can be either user defined'
              ' in the form of a path to an xlsx or from a predefined correspondence'
             ' list. For a full list please visit https://github.com/roedoejet/convertextract/',
     )

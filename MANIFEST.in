@@ -1,5 +1,4 @@
 include requirements/*
-include convertextract/cors/correspondence_spreadsheets/*.xlsx
 include MANIFEST.in
 include README.rst
 include LICENSE

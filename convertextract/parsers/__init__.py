@@ -7,8 +7,10 @@ import importlib
 import glob
 import re
 
+from g2p.mappings import Mapping
+from g2p.transducer import Transducer
+
 from .. import exceptions
-from ..cors import Correspondence
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -75,12 +77,9 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
     # do the extraction
 
     parser = filetype_module.Parser(**kwargs)
-    # print("encoding is " + encoding)
-    # print(type(parser.process(filename, encoding, **kwargs)))
-    # print(parser.process(filename, encoding, **kwargs))
     return parser.process(filename, encoding, **kwargs)
 
-def processText(text, **kwargs):
+def process_text(text, **kwargs):
     """This is a basic function that takes some text as input and 
     transliterates based on the provided transliteration scheme
     """
@@ -88,12 +87,22 @@ def processText(text, **kwargs):
     # make sure optional kwargs are None is not supplied
     if not "language" in kwargs:
         kwargs["language"] = None
+    
+    if not "table" in kwargs:
+        kwargs["table"] = None
 
     language = kwargs["language"]
+    table = kwargs["table"]
     del kwargs["language"]
-    cors = Correspondence(language, **kwargs)
+    if language and table:
+        mapping = Mapping(language={'lang': language, 'table': table})
+    elif language:
+        mapping = Mapping(language)
+    else:
+        mapping = Mapping(table)
+    transducer = Transducer(mapping, as_is=kwargs.get('as_is', False))
 
-    return cors.apply_rules(text)
+    return transducer(text)
 
 
 def _get_available_extensions():
