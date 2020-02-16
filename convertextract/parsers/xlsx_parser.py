@@ -10,7 +10,10 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         converted_filename = filename[:-5] + '_converted.xlsx'
-        transducer = self.get_transducer(kwargs.get('language', ''), kwargs.get('table', ''))
+        if 'mapping' in kwargs and kwargs['mapping']:
+            transducer = self.create_transducer(kwargs['mapping'])
+        else:
+            transducer = self.get_transducer(kwargs.get('input_language', ''), kwargs.get('output_language', ''))
         workbook = load_workbook(filename)
         sheet_names = workbook.worksheets
         output = "\n"
@@ -23,9 +26,8 @@ class Parser(BaseParser):
                     if value:
                         if isinstance(value, (int, float)):
                             value = six.text_type(value)
-                        if "language" in kwargs and kwargs['language']:
-                            value = transducer(value)
-                            col.value = value
+                        value = transducer(value)
+                        col.value = value
                         new_output.append(value)
                 if new_output:
                     output += u' '.join(new_output) + u'\n'

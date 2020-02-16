@@ -8,7 +8,10 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         converted_filename = filename[:-5] + '_converted.pptx'
-        transducer = self.get_transducer(kwargs.get('language', ''), kwargs.get('table', ''))
+        if 'mapping' in kwargs and kwargs['mapping']:
+            transducer = self.create_transducer(kwargs['mapping'])
+        else:
+            transducer = self.get_transducer(kwargs.get('input_language', ''), kwargs.get('output_language', ''))
         presentation = pptx.Presentation(filename)
         text_runs = []
         for slide in presentation.slides:
@@ -17,8 +20,7 @@ class Parser(BaseParser):
                     continue
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        if "language" in kwargs and kwargs['language']:
-                            run.text = transducer(run.text)
+                        run.text = transducer(run.text)
                         text_runs.append(run.text)
         if "no_write" in kwargs and kwargs['no_write']:
             pass

@@ -11,8 +11,7 @@ import six
 import re
 import glob
 
-from g2p.mappings.langs import LANGS_AVAILABLE, TABLES_AVAILABLE
-
+from g2p.mappings.langs import LANGS_NETWORK
 import argcomplete
 
 from . import VERSION
@@ -70,22 +69,22 @@ def get_parser():
         help='Specify the extension of the file.',
     )
     parser.add_argument(
-        '-m', '--method', default='',
-        help='Specify a method of extraction for formats that support it',
-    )
-    parser.add_argument(
         '-o', '--output', type=FileType('wb'), default='-',
         help='Output raw text in this file',
     )
     parser.add_argument('--no-write', dest='no_write', action='store_true', help="Disable default writing of converted file.")
     parser.add_argument(
-        '-l', '--language', type=str,
-        choices=LANGS_AVAILABLE,
-        help='Specify language for conversion. For a full list please visit https://github.com/roedoejet/convertextract/',
+        '-m', '--mapping', type=os.path.abspath,
+        help='Path to a lookup table for conversion. Only use this if the g2p library does not have the mapping you want.',
     )
+    parser.add_argument('-il', '--input-language',
+                    choices=LANGS_NETWORK.nodes,
+                    help='The input language to be converted from, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
+    parser.add_argument('-ol', '--output-language',
+                    choices=LANGS_NETWORK.nodes,
+                    help='The output language to be converted to, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
     parser.add_argument(
         '-t', '--table', type=str,
-        choices=TABLES_AVAILABLE,
         help='Specify lookup table for conversion. Can be either user defined'
              ' in the form of a path to an xlsx or from a predefined correspondence'
             ' list. For a full list please visit https://github.com/roedoejet/convertextract/',

@@ -1,3 +1,8 @@
+* Version 3.0.0
+  * Uses udpated external g2p library for conversions
+  * Breaking change: both an *input_language* and and *output_language* now have to be specified instead of just *table* as in the previous API. In the command line, this is done with the `-il` and `-ol` arguments respectively. 
+  * Breaking change: The argument *language* `-l` has now been deprecated and if using a custom mapping file (csv, tsv, psv, json, or xlsx) you must write your rules in the style used by `g2p` and provide the path with the *mapping* `-m` argument.
+
 * Version 2.5.0
   * Uses external g2p library for transductions
   * Breaking change: **from** is now labelled **in**, **to** is now labelled **out**, **after** is now labelled **context_after** and **before** is now labelled **context_before**

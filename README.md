@@ -23,19 +23,34 @@ Some source libraries need to be installed for different operating systems to su
 
 Some basic Textract functions are preserved. Please visit <http://textract.readthedocs.org> for documentation.
 
-#### Converting a file based on xlsx
-convertextract requires two arguments:
+#### Converting a file based on pre-existing Mappings in the G2P library
+
+Under the hood, convertextract uses the (g2p)[https://github.com/roedoejet/g2p] library to do conversions. There are many mappings available through that library. For a list of all possible mappings, please visit <https://g2pstudio-herokuapp.com/api/v1/langs>.
+
+For this type of call, convertextract requires three arguments:
 
 1. A file containing text to convert (as of Version 1.0.4, this includes **.pptx**, **.docx**, **.xlsx**, and **.txt**)
-2. An **.xlsx** file containing the find/replace correspondences. As of Version 2.0.1 you can also use either **.csv** files or feed a list of correspondences (as Python dicts) directly into the language keyword argument for either `process` or `process_text`
+2. A code corresponding to the input language of the text.
+3. A code corresponding to the desired output language of the text.
 
-Running the comand:
+Running the command:
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l path/to/bar.xlsx
+convertextract path/to/foo.docx -il eng-ipa -ol eng-arpabet
 ```
-Will produce a new file `path/to/foo_converted.docx` which will contain the same content as `path/to/foo.docx` but with find/replace performed for all correspondences listed in `path/to/bar.xlsx`.
 
-#### Creating an .xlsx correspondence sheet
+Will produce a new file `path/to/foo_converted.docx` which will contain the same content as `path/to/foo.docx` but with find/replace performed for all correspondences listed in the mapping between English IPA (eng-ipa) and English Arpabet (eng-arpabet). 
+
+#### Converting a file based on custom mapping
+If the mapping you want is not supported by g2p, you should make a pull request there to have it included! Otherwise, you can use a custom file.
+
+Running the command:
+```{r, engine='python', count_lines}
+convertextract path/to/foo.docx -m path/to/rules.csv
+```
+
+Will produce a new file `path/to/foo_converted.docx` which will contain the same content as `path/to/foo.docx` but with find/replace performed for all correspondences listed in the mapping at `path/to/rules.csv`. 
+
+#### Creating an .xlsx/.csv/.psv/.tsv correspondence sheet
 Your correspondence sheet must be set up as follows:
 
 |    in   |  out           |
@@ -48,26 +63,26 @@ Here, this correspondence sheet (do not include headers like "replace with" or "
 
 #### Supported conversions
 
-As of Version 2.0, the following conversions are supported:
+As of Version 3.0, any mappings that are valid in the g2p library are supported. Here are a few:
 
 * Heiltsuk Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l hei -t Doulos
+convertextract path/to/foo.docx -il hei -ol hei-doulos
 ```
 
 * Heiltsuk Times Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l hei -t Times
+convertextract path/to/foo.docx -il hei -ol hei-times
 ```
 
 * Tsilhqot'in Doulos Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l clc -t Doulos
+convertextract path/to/foo.docx -il clc -ol clc-doulos
 ```
 
 * Navajo Times Font -> Unicode
 ```{r, engine='python', count_lines}
-convertextract path/to/foo.docx -l nav -t Times
+convertextract path/to/foo.docx -il nav -ol nav-times
 ```
 
 #### Using Regular Expressions
@@ -86,12 +101,12 @@ For more information on how the g2p is acutally processed, please visit <https:/
 You can use the package in a Python script, which returns converted text, but without formatting. Running the script will still create a `foo_converted.docx` file.
 ```python
 import convertextract
-text = convertextract.process('foo.docx', language='bar.xlsx')
+text = convertextract.process('foo.docx', mapping='bar.xlsx')
 ```
 
 You can also use convertextract to just convert text in Python using `process_text`.
 
 ```python
 import convertextract
-text = convertextract.process_text('test', language=[{'in': 't', 'out': 'p', 'context_before': '^', 'context_after': 'e'}])
+text = convertextract.process_text('test', mapping=[{'in': 't', 'out': 'p', 'context_before': '^', 'context_after': 'e'}])
 ```

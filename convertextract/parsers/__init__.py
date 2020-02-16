@@ -7,9 +7,11 @@ import importlib
 import glob
 import re
 
+from g2p import make_g2p
 from g2p.mappings import Mapping
 from g2p.transducer import Transducer
 
+from .utils import BaseParser as bp
 from .. import exceptions
 
 # Dictionary structure for synonymous file extension types
@@ -83,26 +85,14 @@ def process_text(text, **kwargs):
     """This is a basic function that takes some text as input and 
     transliterates based on the provided transliteration scheme
     """
-    
-    # make sure optional kwargs are None is not supplied
-    if not "language" in kwargs:
-        kwargs["language"] = None
-    
-    if not "table" in kwargs:
-        kwargs["table"] = None
-
-    language = kwargs["language"]
-    table = kwargs["table"]
-    del kwargs["language"]
-    if language and table:
-        mapping = Mapping(language={'lang': language, 'table': table})
-    elif language:
-        mapping = Mapping(language)
+    if 'mapping' in kwargs:
+        transducer = bp.create_transducer(kwargs['mapping'])
+        return transducer(text)
+    elif not ("input_language" in kwargs and kwargs['input_language']) or ("output_language" in kwargs and kwargs['output_language']):
+        raise exceptions.CorrespondenceMissing("input_language: " + kwargs.get('input_language', '') + " output_language: " + kwargs.get('output_language', ''))
     else:
-        mapping = Mapping(table)
-    transducer = Transducer(mapping, as_is=kwargs.get('as_is', False))
-
-    return transducer(text)
+        transducer = bp.get_transducer(kwargs['input_language'], kwargs['output_language'])
+        return transducer(text)
 
 
 def _get_available_extensions():

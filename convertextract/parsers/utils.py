@@ -8,8 +8,10 @@ import os
 import errno
 from typing import Union
 
+from g2p import make_g2p
 from g2p.mappings import Mapping
 from g2p.transducer import Transducer
+from g2p.mappings.utils import load_from_file
 
 import six
 import chardet
@@ -69,29 +71,30 @@ class BaseParser(object):
         # use chardet to automatically detect the encoding text
         result = chardet.detect(text)
         return text.decode(result['encoding'])
-    
-    def get_transducer(self, lang: str, table: str):
-        if not lang and not table:
-            raise exceptions.CorrespondenceMissing(lang)
-        elif not lang:
-            try:
-                mapping = Mapping(lang)
-            except:
-                if not isinstance(lang, str) or not os.path.exists(lang):
-                    raise exceptions.CorrespondenceMissing(lang)
-                else:
-                    raise exceptions.MalformedCorrespondence(lang)
-        elif not table:
-            try:
-                mapping = Mapping(table)
-            except:
-                if not isinstance(table, str) or not os.path.exists(table):
-                    raise exceptions.CorrespondenceMissing(table)
-                else:
-                    raise exceptions.MalformedCorrespondence(table)
+
+    @staticmethod
+    def get_transducer(input_language: str, output_language: str):
+        if not input_language:
+            input_language = ''
+            raise exceptions.CorrespondenceMissing(input_language)
+        elif not output_language:
+            output_language = ''
+            raise exceptions.CorrespondenceMissing(output_language)
         else:
-            mapping = Mapping(language={'lang': lang, 'table': table})
-        return Transducer(mapping)
+            return make_g2p(input_language, output_language)
+    @staticmethod
+    def create_transducer(mapping):
+        if mapping:
+            if isinstance(mapping, list):
+                mapping_data = mapping
+            elif os.path.isfile(mapping):
+                mapping_data = load_from_file(mapping)
+            mapping_obj = Mapping(mapping_data)
+            return Transducer(mapping_obj)
+        else:
+            mapping = str(mapping)
+            raise exceptions.MissingFileError(mapping)
+
 
 class ShellParser(BaseParser):
     """The :class:`.ShellParser` extends the :class:`.BaseParser` to make

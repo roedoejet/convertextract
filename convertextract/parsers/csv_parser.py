@@ -9,7 +9,10 @@ class Parser(BaseParser):
     delimiter = ','
 
     def extract(self, filename, **kwargs):
-        transducer = self.get_transducer(kwargs.get('language', ''), kwargs.get('table', ''))
+        if 'mapping' in kwargs and kwargs['mapping']:
+            transducer = self.create_transducer(kwargs['mapping'])
+        else:
+            transducer = self.get_transducer(kwargs.get('input_language', ''), kwargs.get('output_language', ''))
         # quick 'n dirty solution for the time being
         with open(filename) as stream:
             reader = csv.reader(stream, delimiter=self.delimiter)
