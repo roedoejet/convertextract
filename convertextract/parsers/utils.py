@@ -5,6 +5,7 @@ reused in many of the other parser modules.
 import subprocess
 import tempfile
 import os
+import re
 import errno
 from typing import Union
 
@@ -86,10 +87,14 @@ class BaseParser(object):
     def create_transducer(mapping):
         if mapping:
             if isinstance(mapping, list):
-                mapping_data = mapping
+                mapping_obj = Mapping(mapping)
+            elif isinstance(mapping, str) and re.search(r'.y(a)*ml\b', mapping):
+                mapping_obj = Mapping(mapping)
             elif os.path.isfile(mapping):
                 mapping_data = load_from_file(mapping)
-            mapping_obj = Mapping(mapping_data)
+                mapping_obj = Mapping(mapping_data)
+            else:
+                raise exceptions.MissingFileError(mapping)
             return Transducer(mapping_obj)
         else:
             mapping = str(mapping)

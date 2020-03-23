@@ -20,7 +20,7 @@ class Parser(BaseParser):
                     continue
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.text = transducer(run.text)
+                        run.text = transducer(run.text).output_string
                         text_runs.append(run.text)
         if "no_write" in kwargs and kwargs['no_write']:
             pass

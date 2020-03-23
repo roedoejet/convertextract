@@ -18,7 +18,7 @@ class Parser(BaseParser):
             for run in paragraph.runs:
                 # this line prevents images from being erased
                 if run.text != "" and run.text != " ":
-                    run.text = transducer(run.text)
+                    run.text = transducer(run.text).output_string
                     text_runs.append(run.text)
         if "no_write" in kwargs and kwargs['no_write']:
             pass

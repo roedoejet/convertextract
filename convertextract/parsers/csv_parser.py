@@ -16,4 +16,4 @@ class Parser(BaseParser):
         # quick 'n dirty solution for the time being
         with open(filename) as stream:
             reader = csv.reader(stream, delimiter=self.delimiter)
-            return transducer('\n'.join([self.delimiter.join(row) for row in reader]))
+            return transducer('\n'.join([self.delimiter.join(row) for row in reader])).output_string

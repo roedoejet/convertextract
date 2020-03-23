@@ -1,3 +1,7 @@
+* Version 3.1.0
+  * Uses udpated external g2p library for conversions (v0.4+)
+  * You must upgrade your installed version of the g2p library to >= 0.4.x
+
 * Version 3.0.0
   * Uses udpated external g2p library for conversions
   * Breaking change: both an *input_language* and and *output_language* now have to be specified instead of just *table* as in the previous API. In the command line, this is done with the `-il` and `-ol` arguments respectively. 

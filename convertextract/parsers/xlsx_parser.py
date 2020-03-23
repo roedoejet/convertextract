@@ -26,7 +26,7 @@ class Parser(BaseParser):
                     if value:
                         if isinstance(value, (int, float)):
                             value = six.text_type(value)
-                        value = transducer(value)
+                        value = transducer(value).output_string
                         col.value = value
                         new_output.append(value)
                 if new_output:

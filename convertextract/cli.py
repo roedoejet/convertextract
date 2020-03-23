@@ -84,12 +84,6 @@ def get_parser():
                     choices=LANGS_NETWORK.nodes,
                     help='The output language to be converted to, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
     parser.add_argument(
-        '-t', '--table', type=str,
-        help='Specify lookup table for conversion. Can be either user defined'
-             ' in the form of a path to an xlsx or from a predefined correspondence'
-            ' list. For a full list please visit https://github.com/roedoejet/convertextract/',
-    )
-    parser.add_argument(
         '-O', '--option', type=str, action=AddToNamespaceAction,
         help=(
             'Add arbitrary options to various parsers of the form '

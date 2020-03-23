@@ -11,7 +11,7 @@ class Parser(BaseParser):
         else:
             transducer = self.get_transducer(kwargs.get('input_language', ''), kwargs.get('output_language', ''))
         converted_filename = filename[:-4] + '_converted.txt'
-        text = transducer(text)
+        text = transducer(text).output_string
 
         if "no_write" in kwargs and kwargs['no_write']:
             pass
