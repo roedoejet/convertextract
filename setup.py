@@ -51,7 +51,7 @@ setup(
     url=github_url,
     download_url="%s/archives/master" % github_url,
     author='Aidan Pine',
-    author_email='info@mothetongues.org',
+    author_email='info@mothertongues.org',
     license='MIT',
     scripts=scripts,
     include_package_data=True,

@@ -14,13 +14,18 @@ import glob
 from g2p.mappings.langs import LANGS_NETWORK
 import argcomplete
 
-from . import VERSION
-from .parsers import DEFAULT_ENCODING, _get_available_extensions
+
+from convertextract import VERSION
+from convertextract.parsers import DEFAULT_ENCODING, _get_available_extensions
+from convertextract import process
+from convertextract.exceptions import CommandLineError
+from convertextract.colors import red
 
 
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object
     """
+
     def __call__(self, parser, namespace, values, option_string=None):
         key, val = values.strip().split('=')
         if hasattr(namespace, key):
@@ -56,33 +61,34 @@ def get_parser():
 
     # define the command line options here
     parser.add_argument(
-        'filename', help='Filename to extract text.',
+        'filename', help='Filename to extract text from'
     ).completer = argcomplete.completers.FilesCompleter
     parser.add_argument(
         '-e', '--encoding', type=str, default=DEFAULT_ENCODING,
         choices=_get_available_encodings(),
-        help='Specify the encoding of the output.',
+        help='Specify the encoding of the output',
     )
     parser.add_argument(
         '--extension', type=str, default=None,
         choices=_get_available_extensions(),
-        help='Specify the extension of the file.',
+        help='Specify the extension of the file',
     )
     parser.add_argument(
-        '-o', '--output', type=FileType('wb'), default='-',
+        '-o', '--output', type=FileType('wb'), default='',
         help='Output raw text in this file',
     )
-    parser.add_argument('--no-write', dest='no_write', action='store_true', help="Disable default writing of converted file.")
+    parser.add_argument('--no-write', dest='no_write', action='store_true',
+                        help="Disable default console writing of converted file.")
     parser.add_argument(
         '-m', '--mapping', type=os.path.abspath,
         help='Path to a lookup table for conversion. Only use this if the g2p library does not have the mapping you want.',
     )
     parser.add_argument('-il', '--input-language',
-                    choices=LANGS_NETWORK.nodes,
-                    help='The input language to be converted from, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
+                        choices=LANGS_NETWORK.nodes,
+                        help='The input language to be converted from, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
     parser.add_argument('-ol', '--output-language',
-                    choices=LANGS_NETWORK.nodes,
-                    help='The output language to be converted to, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
+                        choices=LANGS_NETWORK.nodes,
+                        help='The output language to be converted to, for a full list please visit https://g2p-studio.herokuapp.com/api/v1/langs')
     parser.add_argument(
         '-O', '--option', type=str, action=AddToNamespaceAction,
         help=(
@@ -96,7 +102,7 @@ def get_parser():
     )
 
     # enable autocompletion with argcomplete
-    argcomplete.autocomplete(parser)
+    # argcomplete.autocomplete(parser)
 
     return parser
 
@@ -114,3 +120,8 @@ def _get_available_encodings():
     available_encodings = list(available_encodings)
     available_encodings.sort()
     return available_encodings
+
+
+
+
+

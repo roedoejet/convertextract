@@ -1,0 +1,9 @@
+argcomplete==1.8.2
+chardet==3.0.4
+python-pptx==0.6.6
+beautifulsoup4==4.6.0
+python-docx==0.8.6
+xlrd==1.0.0
+openpyxl
+six>=1.10.0
+g2p>=0.4
