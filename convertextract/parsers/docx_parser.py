@@ -20,8 +20,6 @@ class Parser(BaseParser):
                 if run.text != "" and run.text != " ":
                     run.text = transducer(run.text).output_string
                     text_runs.append(run.text)
-        if "no_write" in kwargs and kwargs['no_write']:
-            pass
-        else:
+        if "no_write" not in kwargs or not kwargs['no_write']:
             document.save(converted_filename)
         return '\n\n'.join(text_runs)

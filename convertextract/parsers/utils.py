@@ -83,6 +83,7 @@ class BaseParser(object):
             raise exceptions.CorrespondenceMissing(output_language)
         else:
             return make_g2p(input_language, output_language)
+    
     @staticmethod
     def create_transducer(mapping):
         if mapping:
