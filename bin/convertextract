@@ -27,6 +27,7 @@ def main():
         sys.stderr.write(red(ex) + '\n')
         sys.exit(1)
     else:
-        args.output.write(output)
+        if args.output:
+            args.output.write(output)
 
 main()
