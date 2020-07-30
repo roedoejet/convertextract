@@ -11,26 +11,30 @@ class Parser(BaseParser):
         else:
             transducer = self.get_transducer(kwargs.get('input_language', ''), 
                                              kwargs.get('output_language', ''))
-        converted_filename = filename[:-4] + '_converted.eaf'
-        
-        # Here is where you should parse and convert the Elan file
-        eaf_obj = pympi.Elan.Eaf()
-        elan_data = pympi.Elan.parse_eaf(filename, eaf_obj)
-        tiers = elan_data.get_tier_names() #returned as a list
-        for tier in tiers:
-            if tier == "aligned_annotations" or "reference_annotations":
-                result = elan_data.get_annotation_data_for_tier(tier) #Gives a list of annotations of the form: (begin, end, value)
-                annotation = result[2]
+            converted_filename = filename[:-4] + '_converted.eaf'
+            return converted_filename
+        print("SUCCESS", converted_filename)
+        # # Here is where you should parse and convert the Elan file
+        # eaf_obj = pympi.Elan.Eaf()
+        # elan_data = pympi.Elan.parse_eaf(filename, eaf_obj)
+        # tiers = elan_data.get_tier_names() #returned as a list
+        # for tier in tiers:
+        #     if tier == "aligned_annotations" or "reference_annotations":
+        #         result = elan_data.get_annotation_data_for_tier(tier) #Gives a list of annotations of the form: (begin, end, value)
+        #         annotation = result[2]
 
-        transducer(annotation).output_string
+        # transducer(annotation).output_string
 
-        if "no_write" not in kwargs or not kwargs['no_write']:
-            # This should save the file!!!
-            pass
-        # This should return the converted text
-        return
+        # if "no_write" in kwargs or kwargs['no_write']:
+        #     pass
+        # else:
+        #     elan_data.save(converted_filename)
+
+        # return transducer(annotation).output_string
 
 
-if __name__ == '__main__':
-    print('helloooo')
+#if __name__ == '__main__':
+#    print('helloooo')
     # put your stuff here
+
+#convertextract path/to/foo.eaf -il eng-ipa -ol eng-arpabet
