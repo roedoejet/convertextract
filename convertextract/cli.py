@@ -74,7 +74,7 @@ def get_parser():
         help='Specify the extension of the file',
     )
     parser.add_argument(
-        '-o', '--output', type=FileType('wb'), default='',
+        '-o', '--output', type=FileType('wb'),
         help='Output raw text in this file',
     )
     parser.add_argument('--no-write', dest='no_write', action='store_true',
