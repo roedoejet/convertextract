@@ -5,13 +5,13 @@ import logging
 from gooey import Gooey, GooeyParser
 from g2p.mappings.langs import LANGS_NETWORK
 
+import convertextract
 from convertextract.cli import _get_available_encodings
 from convertextract import process
 from convertextract.parsers import DEFAULT_ENCODING
 from convertextract.exceptions import CommandLineError
 from convertextract.colors import red
 from convertextract import VERSION
-
 
 def get_gui():
     parser = GooeyParser(

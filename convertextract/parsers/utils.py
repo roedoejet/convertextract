@@ -17,7 +17,7 @@ from g2p.mappings.utils import load_from_file
 import six
 import chardet
 
-from .. import exceptions
+from convertextract import exceptions
 
 
 class BaseParser(object):
