@@ -33,8 +33,6 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: convertextract
       - name: setup pyenv
         env: 
           PYTHON_CONFIGURE_OPTS: "--enable-shared"
@@ -48,10 +46,8 @@ jobs:
           pip install -r requirements.txt
           pip install .
           pip install gooey pyinstaller
-      - uses: actions/checkout@v2
-        with:
-          name: roedoejet/g2p
-          path: g2p
+      - uses: clone g2p
+        run: git clone https://github.com/roedoejet/g2p.git $GITHUB_WORKSPACE/g2p
       - name: Build
         run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract/convertextract && pyinstaller convertextract.spec
       - uses: actions/upload-artifact@v2
