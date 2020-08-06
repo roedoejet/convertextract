@@ -51,9 +51,9 @@ jobs:
         run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract && pyinstaller convertextract.spec
       - name: Zip
         run: |
-        zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
-        mkdir $GITHUB_WORKSPACE/artifacts
-        cp $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/artifacts
+          zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
+          mkdir $GITHUB_WORKSPACE/artifacts
+          cp $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/artifacts
       - uses: actions/upload-artifact@v2
         with:
           name: build
