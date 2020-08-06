@@ -53,7 +53,7 @@ jobs:
           name: roedoejet/g2p
           path: g2p
       - name: Build
-        run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract && pyinstaller convertextract.spec
+        run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract/convertextract && pyinstaller convertextract.spec
       - uses: actions/upload-artifact@v2
         with:
           name: macOS-build
