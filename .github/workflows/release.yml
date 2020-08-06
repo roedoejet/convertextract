@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: setup pyenv
         env: 
-          PYTHON_CONFIGURE_OPTS:"--enable-shared"
+          PYTHON_CONFIGURE_OPTS: "--enable-shared"
         uses: "gabrielfalcao/pyenv-action@v5"
         with:
           default: 3.6.9
