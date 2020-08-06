@@ -49,15 +49,7 @@ jobs:
         run: git clone https://github.com/roedoejet/g2p.git $GITHUB_WORKSPACE/g2p
       - name: Build
         run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract && pyinstaller convertextract.spec
-      - name: Zip
-        run: |
-          zip -r $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
-          mkdir $GITHUB_WORKSPACE/artifacts
-          cp $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/artifacts
-          ls -l $GITHUB_WORKSPACE/artifacts
-      - name: sanity check
-        run: ls -l $GITHUB_WORKSPACE/artifacts
       - uses: actions/upload-artifact@v2
         with:
           name: macOS
-          path: artifacts/Convertextract-macOS.zip
+          path: convertextract/convertextract/dist/
