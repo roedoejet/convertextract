@@ -21,9 +21,10 @@ from PyInstaller.utils.hooks import collect_submodules
 
 block_cipher = None
 hiddenimps = collect_submodules('convertextract')
+PATH_PFX = os.getenv('GITHUB_WORKSPACE', os.getenv('HOME'))
 a = Analysis(['gui.py'],  # replace me with your path
-             datas = [(os.path.join(os.getenv('HOME'), 'g2p/g2p'), 'g2p')],
-             pathex=[os.path.join(os.getenv('HOME'), 'convertextract/convertextract/gui.py')],
+             datas = [(os.path.join(PATH_PFX, 'g2p/g2p'), 'g2p')],
+             pathex=[os.path.join(PATH_PFX, 'convertextract/convertextract/gui.py')],
              hiddenimports=hiddenimps,
              hookspath=None,
              runtime_hooks=None,
