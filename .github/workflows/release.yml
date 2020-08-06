@@ -46,7 +46,7 @@ jobs:
           pip install -r requirements.txt
           pip install .
           pip install gooey pyinstaller
-      - uses: clone g2p
+      - name: Clone g2p
         run: git clone https://github.com/roedoejet/g2p.git $GITHUB_WORKSPACE/g2p
       - name: Build
         run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract/convertextract && pyinstaller convertextract.spec
