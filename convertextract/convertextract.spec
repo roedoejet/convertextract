@@ -21,10 +21,9 @@ from PyInstaller.utils.hooks import collect_submodules
 
 block_cipher = None
 hiddenimps = collect_submodules('convertextract')
-print(hiddenimps)
 a = Analysis(['gui.py'],  # replace me with your path
-             datas = [('/Users/pinea/g2p/g2p', 'g2p')],
-             pathex=['/Users/pinea/convertextract/convertextract/gui.py'],
+             datas = [(os.path.join(os.getenv('HOME'), 'g2p/g2p'), 'g2p')],
+             pathex=[os.path.join(os.getenv('HOME'), 'convertextract/convertextract/gui.py')],
              hiddenimports=hiddenimps,
              hookspath=None,
              runtime_hooks=None,
