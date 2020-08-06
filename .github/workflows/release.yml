@@ -45,6 +45,9 @@ jobs:
           pip install -r requirements.txt
           pip install .
           pip install gooey pyinstaller
+      - uses: actions/checkout@v2
+        with:
+          name: roedoejet/g2p
       - name: Build
         run: cd convertextract && pyinstaller convertextract.spec
       - uses: actions/upload-artifact@v2
