@@ -59,5 +59,5 @@ jobs:
         run: ls -l $GITHUB_WORKSPACE/artifacts
       - uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: $GITHUB_WORKSPACE/artifacts/
+          name: macOS
+          path: $GITHUB_WORKSPACE/artifacts/Convertextract-macOS.zip
