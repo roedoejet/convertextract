@@ -1,0 +1,54 @@
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+name: Release
+
+on:
+  release:
+    types: [ created ]
+  push:
+    branches: [ release ]
+jobs:
+  PyPI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
+  Mac:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Enable Framework
+        run: 
+      - name: setup pyenv
+        env: 
+          PYTHON_CONFIGURE_OPTS:"--enable-shared"
+        uses: "gabrielfalcao/pyenv-action@v5"
+        with:
+          default: 3.6.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install .
+          pip install gooey pyinstaller
+      - name: Build
+        run: cd convertextract && pyinstaller convertextract.spec
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macOS-build
+          path: convertextract/convertextract/dist/Convertextract.app
