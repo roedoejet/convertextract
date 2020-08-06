@@ -49,7 +49,10 @@ exe = EXE(pyz,
           console=False,
           icon=os.path.join(gooey_root, 'images', 'program_icon.ico'))
 
-info_plist = {'addition_prop': 'additional_value'}
+info_plist = {
+    'addition_prop': 'additional_value', 
+    'NSHighResolutionCapable': 'True'
+    }
 app = BUNDLE(exe,
              name='Convertextract.app',
              bundle_identifier=None,
