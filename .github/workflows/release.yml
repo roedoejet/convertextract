@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: setup pyenv
         env: 
-          PYTHON_CONFIGURE_OPTS: "--enable-shared"
+          PYTHON_CONFIGURE_OPTS: "--enable-framework"
         uses: "gabrielfalcao/pyenv-action@v5"
         with:
           default: 3.6.9
@@ -51,7 +51,7 @@ jobs:
         run: pyenv local 3.6.9 && pyenv global 3.6.9 && cd $GITHUB_WORKSPACE/convertextract && pyinstaller convertextract.spec
       - name: Zip
         run: |
-          zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
+          zip -r $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
           mkdir $GITHUB_WORKSPACE/artifacts
           cp $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/artifacts
           ls -l $GITHUB_WORKSPACE/artifacts
@@ -60,4 +60,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: macOS
-          path: $GITHUB_WORKSPACE/artifacts/Convertextract-macOS.zip
+          path: artifacts/Convertextract-macOS.zip
