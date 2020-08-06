@@ -54,6 +54,9 @@ jobs:
           zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/convertextract/dist/Convertextract.app
           mkdir $GITHUB_WORKSPACE/artifacts
           cp $GITHUB_WORKSPACE/convertextract/dist/Convertextract-macOS.zip $GITHUB_WORKSPACE/artifacts
+          ls -l $GITHUB_WORKSPACE/artifacts
+      - name: sanity check
+        run: ls -l $GITHUB_WORKSPACE/artifacts
       - uses: actions/upload-artifact@v2
         with:
           name: build
