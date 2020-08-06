@@ -32,8 +32,6 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Enable Framework
-        run: 
       - name: setup pyenv
         env: 
           PYTHON_CONFIGURE_OPTS:"--enable-shared"
