@@ -37,9 +37,9 @@ def parse_requirements(requirements_filename):
     return dependencies, dependency_links
 
 
-requirements_filename = os.path.join("requirements", "python")
+requirements_filename = "requirements.txt"
 dependencies, dependency_links = parse_requirements(requirements_filename)
-
+print(dependencies)
 
 setup(
     name=convertextract.__name__,

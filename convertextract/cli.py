@@ -51,7 +51,6 @@ class FileType(argparse.FileType):
 def get_parser():
     """Initialize the parser for the command line interface and bind the
     autocompletion functionality"""
-
     # initialize the parser
     parser = argparse.ArgumentParser(
         description=(
