@@ -69,8 +69,7 @@ jobs:
       - name: zip
         run: |
         zip -r release.zip macOS
-        pkg_version=$(python3 setup.py --version)
-        echo "::set-env name=PKG_VERSION::$pkg_version"
+        echo "::set-env name=PKG_VERSION::$(python3 setup.py --version)"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
