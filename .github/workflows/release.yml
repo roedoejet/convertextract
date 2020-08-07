@@ -69,6 +69,8 @@ jobs:
       - name: zip
         run: |
           zip -r release.zip macOS
+          pip3 install setuptools
+          pip3 install .
           echo "::set-env name=PKG_VERSION::$(python3 setup.py --version)"
       - name: Create Release
         id: create_release
@@ -76,8 +78,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.pkg_version }}
-          release_name: Release ${{ env.pkg_version }}
+          tag_name: ${{ env.PKG_VERSION }}
+          release_name: Release ${{ env.PKG_VERSION }}
           draft: false
           prerelease: true
       - name: Upload Release Assets
