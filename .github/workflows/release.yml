@@ -65,6 +65,8 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: macOS
+      - name: zip
+        run: zip -r macOS release.zip
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -82,6 +84,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./macOS
-          asset_name: macOS
+          asset_path: ./release.zip
+          asset_name: release
           asset_content_type: application/zip
