@@ -57,23 +57,10 @@ jobs:
         with:
           name: macOS
           path: convertextract/dist/
-  Release:
-    needs: [Mac]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Load Mac Build
-        uses: actions/download-artifact@v1
-        with:
-          name: macOS
-      - name: zip
+      - name:
         run: |
-          zip -r release.zip macOS
-          pip3 install setuptools
-          pip3 install g2p
-          pip install -r requirements.txt
-          pip3 install .
           echo "::set-env name=PKG_VERSION::$(python3 setup.py --version)"
+          zip -r release.zip convertextract/dist
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
