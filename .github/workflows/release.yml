@@ -70,6 +70,7 @@ jobs:
         run: |
           zip -r release.zip macOS
           pip3 install setuptools
+          pip install -r requirements.txt
           pip3 install .
           echo "::set-env name=PKG_VERSION::$(python3 setup.py --version)"
       - name: Create Release
