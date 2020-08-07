@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 import six
 
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 
 class Parser(BaseParser):

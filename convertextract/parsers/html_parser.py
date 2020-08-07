@@ -3,7 +3,7 @@ import six
 
 from bs4 import BeautifulSoup
 
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 class Parser(BaseParser):
     """Extract text from html file using beautifulsoup4. Filter text to

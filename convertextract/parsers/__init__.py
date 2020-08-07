@@ -11,8 +11,8 @@ from g2p import make_g2p
 from g2p.mappings import Mapping
 from g2p.transducer import Transducer
 
-from .utils import BaseParser as bp
-from .. import exceptions
+from convertextract.parsers.utils import BaseParser as bp
+from convertextract import exceptions
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {

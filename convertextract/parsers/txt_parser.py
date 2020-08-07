@@ -1,4 +1,4 @@
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 class Parser(BaseParser):
     """Parse ``.txt`` files"""

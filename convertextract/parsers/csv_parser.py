@@ -1,6 +1,6 @@
 import csv
 
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 class Parser(BaseParser):
     """Extract text from comma separated values files (.csv).
