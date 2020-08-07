@@ -59,7 +59,7 @@ jobs:
           path: convertextract/dist/
       - name: zip
         run: |
-          echo "::set-env name=PKG_VERSION::$(python3 setup.py --version)"
+          echo "::set-env name=PKG_VERSION::$(python3 -c "import pkg_resources; print(pkg_resources.get_distribution('convertextract').version)")"
           zip -r release.zip convertextract/dist
       - name: Create Release
         id: create_release

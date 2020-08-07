@@ -39,7 +39,6 @@ def parse_requirements(requirements_filename):
 
 requirements_filename = "requirements.txt"
 dependencies, dependency_links = parse_requirements(requirements_filename)
-print(dependencies)
 
 setup(
     name=convertextract.__name__,
