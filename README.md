@@ -110,3 +110,34 @@ You can also use convertextract to just convert text in Python using `process_te
 import convertextract
 text = convertextract.process_text('test', mapping=[{'in': 't', 'out': 'p', 'context_before': '^', 'context_after': 'e'}])
 ```
+
+#### Use with GUI (Graphical User Interface)
+
+Convertextract can also run in a GUI (for Mac **only**)
+
+*Installing the GUI*
+To download the app, go to [https://github.com/roedoejet/convertextract/releases](https://github.com/roedoejet/convertextract/releases) and select the most recent version.
+
+![]([https://raw.githubusercontent.com/roedoejet/convertextract/master/convertextract/docs/assets/download.png])
+
+Click to unzip the file, and then *right-click* and select `open`. You must *right-click* or the Mac permissions will not allow you to open the app.
+![]([https://raw.githubusercontent.com/roedoejet/convertextract/master/convertextract/docs/assets/unzip.png])
+![]([https://raw.githubusercontent.com/roedoejet/convertextract/master/convertextract/docs/assets/open.png])
+
+*Using the GUI*
+The Convertextract app has four arguments:
+
+1.  A file containing text to convert (As of version 3.2.2 **.csv**,
+ **.psv**, **.tsv**, **.doc**, **.docx**, **.txt**, **.eaf**, **.json**, **.pptx**, **.html**, **.xls**, **.xlsx** are supported).
+ 
+2.  A code that specifies the desired encoding.
+
+3. A code corresponding to the input language of the text.
+    
+4.  A code corresponding to the desired output language of the text.
+
+There is also the option for custom g2p lookup tables if your mapping is not already in the `g2p` library.
+
+![]([https://raw.githubusercontent.com/roedoejet/convertextract/master/convertextract/docs/assets/gui.png])
+
+The GUI will produce a new file `path/to/foo_converted.docx` which will contain the same content as `path/to/foo.docx` but with find/replace performed for all correspondences listed in the mapping. The file format will remain the same as the input file.
