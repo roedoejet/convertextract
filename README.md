@@ -129,8 +129,8 @@ The Convertextract app has four arguments:
 
 1.  A file containing text to convert (As of version 3.2.2 **.csv**,
  **.psv**, **.tsv**, **.doc**, **.docx**, **.txt**, **.eaf**, **.json**, **.pptx**, **.html**, **.xls**, **.xlsx** are supported).
- 
-2.  A code that specifies the desired encoding.
+
+2.  A code that specifies the desired encoding, for example `UTF-8`.
 
 3. A code corresponding to the input language of the text.
     
