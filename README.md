@@ -25,7 +25,7 @@ Some basic Textract functions are preserved. Please visit <http://textract.readt
 
 #### Converting a file based on pre-existing Mappings in the G2P library
 
-Under the hood, convertextract uses the (g2p)[https://github.com/roedoejet/g2p] library to do conversions. There are many mappings available through that library. For a list of all possible mappings, please visit <https://g2pstudio-herokuapp.com/api/v1/langs>.
+Under the hood, convertextract uses the [g2p](https://github.com/roedoejet/g2p) library to do conversions. There are many mappings available through that library. For a list of all possible mappings, please visit <https://g2pstudio-herokuapp.com/api/v1/langs>.
 
 For this type of call, convertextract requires three arguments:
 
@@ -136,7 +136,7 @@ The Convertextract app has four arguments:
     
 4.  A code corresponding to the desired output language of the text.
 
-There is also the option for custom g2p lookup tables if your mapping is not already in the `g2p` library.
+There is also the option for custom g2p lookup tables if your mapping is not already in the [g2p](https://github.com/roedoejet/g2p) library.
 
 ![gui](https://raw.githubusercontent.com/roedoejet/convertextract/master/docs/assets/gui.png)
 
