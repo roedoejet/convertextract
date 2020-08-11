@@ -115,7 +115,7 @@ text = convertextract.process_text('test', mapping=[{'in': 't', 'out': 'p', 'con
 
 Convertextract can also run in a GUI (for Mac **only**)
 
-*Installing the GUI*
+### Installing the GUI
 To download the app, go to [https://github.com/roedoejet/convertextract/releases](https://github.com/roedoejet/convertextract/releases) and select the most recent version.
 
 ![download](https://raw.githubusercontent.com/roedoejet/convertextract/master/docs/assets/download.png)
@@ -124,7 +124,7 @@ Click to unzip the file, and then *right-click* and select `open`. You must *rig
 ![unzip](https://raw.githubusercontent.com/roedoejet/convertextract/master/docs/assets/unzip.png)
 ![open](https://raw.githubusercontent.com/roedoejet/convertextract/master/docs/assets/open.png)
 
-*Using the GUI*
+### Using the GUI
 The Convertextract app has four arguments:
 
 1.  A file containing text to convert (As of version 3.2.2 **.csv**,
