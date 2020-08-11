@@ -1,6 +1,6 @@
 import docx
 
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 class Parser(BaseParser):
     """Extract text from docx file using python-docx.

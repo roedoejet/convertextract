@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-08-07T13:53:01-05:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+    <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/davisf/Desktop/225 Metcalfe St 2.mp3" MIME_TYPE="audio/*" RELATIVE_MEDIA_URL="./225 Metcalfe St 2.mp3"/>
+        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:f77eb202-9738-4c81-9dc6-a1ff68396688</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">685</PROPERTY>
+    </HEADER>
+    <TIME_ORDER>
+        <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="970"/>
+        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="990"/>
+        <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="3010"/>
+        <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="3010"/>
+        <TIME_SLOT TIME_SLOT_ID="ts5" TIME_VALUE="4030"/>
+        <TIME_SLOT TIME_SLOT_ID="ts6" TIME_VALUE="4030"/>
+        <TIME_SLOT TIME_SLOT_ID="ts7" TIME_VALUE="6610"/>
+        <TIME_SLOT TIME_SLOT_ID="ts8" TIME_VALUE="6610"/>
+        <TIME_SLOT TIME_SLOT_ID="ts9" TIME_VALUE="7040"/>
+        <TIME_SLOT TIME_SLOT_ID="ts10" TIME_VALUE="7040"/>
+        <TIME_SLOT TIME_SLOT_ID="ts11" TIME_VALUE="21400"/>
+        <TIME_SLOT TIME_SLOT_ID="ts12" TIME_VALUE="21400"/>
+    </TIME_ORDER>
+    <TIER DEFAULT_LOCALE="en" LANG_REF="eng" LINGUISTIC_TYPE_REF="text" TIER_ID="NOTES">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a680" TIME_SLOT_REF1="ts2" TIME_SLOT_REF2="ts3">
+                <ANNOTATION_VALUE>eaf files are the best</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a681" TIME_SLOT_REF1="ts5" TIME_SLOT_REF2="ts7">
+                <ANNOTATION_VALUE>convertextract is the best</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a682" TIME_SLOT_REF1="ts9" TIME_SLOT_REF2="ts11">
+                <ANNOTATION_VALUE>that is why this parser was made so that all the good things can work together and everyone can be happy and convert their eaf files using g2p yay</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <TIER DEFAULT_LOCALE="en" LANG_REF="eng" LINGUISTIC_TYPE_REF="text" TIER_ID="ARPABET">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a683" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts4">
+                <ANNOTATION_VALUE>fineen is talking</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a684" TIME_SLOT_REF1="ts6" TIME_SLOT_REF2="ts8">
+                <ANNOTATION_VALUE>fineen is still talking</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a685" TIME_SLOT_REF1="ts10" TIME_SLOT_REF2="ts12">
+                <ANNOTATION_VALUE>wow fineen is STILL talking why is this</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
+    <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="text" TIME_ALIGNABLE="true"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="note" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="translation" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-michif-text" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-headword" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" CONTROLLED_VOCABULARY_REF="CV-TMD-AnnotationTypes" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-annotation-type" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" CONTROLLED_VOCABULARY_REF="CV-TMD-ExportSettings" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-export" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-annotator-comment" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-english-text" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" CONTROLLED_VOCABULARY_REF="CV-TMD-DegreesOfMatch" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-match" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" CONTROLLED_VOCABULARY_REF="CV-TMD-AnnotationStatus" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="tmd-annotation-status" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="segmentation" TIME_ALIGNABLE="true"/>
+    <LOCALE COUNTRY_CODE="CA" LANGUAGE_CODE="en"/>
+    <LANGUAGE LANG_DEF="http://cdb.iso.org/lg/CDB-00138502-001" LANG_ID="eng" LANG_LABEL="English (eng)"/>
+    <CONSTRAINT DESCRIPTION="Time subdivision of parent annotation's time interval, no time gaps allowed within this interval" STEREOTYPE="Time_Subdivision"/>
+    <CONSTRAINT DESCRIPTION="Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered" STEREOTYPE="Symbolic_Subdivision"/>
+    <CONSTRAINT DESCRIPTION="1-1 association with a parent annotation" STEREOTYPE="Symbolic_Association"/>
+    <CONSTRAINT DESCRIPTION="Time alignable annotations within the parent annotation's time interval, gaps are allowed" STEREOTYPE="Included_In"/>
+    <CONTROLLED_VOCABULARY CV_ID="CV-TMD-DegreesOfMatch">
+        <DESCRIPTION LANG_REF="eng">Degree to which headwords and example sentences found in audio recordings of "The Michif Dictionary" match the text in the corresponding dictionary entry.</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid_0320f9b9-5f8d-4e79-84f1-d779c707ccee">
+            <CVE_VALUE DESCRIPTION="Exact match with entry in &quot;The Michif Dictionary.&quot;" LANG_REF="eng">Exact match</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_89b01b1f-3bd4-4e0b-bee8-08a043fef7fa">
+            <CVE_VALUE DESCRIPTION="Near match with entry in &quot;The Michif Dictionary&quot;" LANG_REF="eng">Partial match</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_f7728a25-11d5-4ab3-bae0-4c1718f96043">
+            <CVE_VALUE DESCRIPTION="New Michif form not found in &quot;The Michif Dictionary&quot;" LANG_REF="eng">No match (new)</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="CV-TMD-AnnotationTypes">
+        <DESCRIPTION LANG_REF="eng">Types of annotations found in ELAN transcripts for "The Michif Dictionary" (TMD) project.  These annotation types are used to identify headwords and example sentences that appear in the ELAN transcripts for audio recordings associated with this project.</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid_7e0e5a16-15cc-49ac-90c9-b1b113102efc">
+            <CVE_VALUE DESCRIPTION="Headword in &quot;The Michif Dictionary&quot;" LANG_REF="eng">Headword</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_203afd42-c02b-4fca-a921-201263a3461c">
+            <CVE_VALUE DESCRIPTION="Continuation of headword in &quot;The Michif Dictionary&quot; (continued from preceding 'Headword' annotation)" LANG_REF="eng">Headword-Continued</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_b2a4a5f4-b0ad-461c-90b0-9419f30eac25">
+            <CVE_VALUE DESCRIPTION="Headword containing false starts, hesitations, partial words, etc." LANG_REF="eng">Headword-Mispronunciation</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_4990987f-6224-4daa-bf27-5512efbcc6db">
+            <CVE_VALUE DESCRIPTION="Example sentence in &quot;The Michif Dictionary&quot;" LANG_REF="eng">Example</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_0dda88f7-ee97-4af6-94b2-cc11af92fc4a">
+            <CVE_VALUE DESCRIPTION="Continuation of example sentence in &quot;The Michif Dictionary&quot; (continued from previous 'Example' annotation)" LANG_REF="eng">Example-Continued</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_049cb8c4-07f5-462b-95cf-cd979fad9569">
+            <CVE_VALUE DESCRIPTION="Example sentence containing false starts, hesitations, partial words, etc." LANG_REF="eng">Example-Mispronunciation</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_a66da2b7-0aa2-4a46-8946-ee0a54c54d5b">
+            <CVE_VALUE DESCRIPTION="Commentary by speaker on headword or example sentence" LANG_REF="eng">Commentary</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="CV-TMD-ExportSettings">
+        <DESCRIPTION LANG_REF="eng">Should the contents (audio and/or text) of this annotation be exported for use in "The Michif Dictionary" (TMD)?  Entries marked as "Export" usually represent the best pronunciation of this headword or example sentence available for this speaker across all recordings.</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid_566910da-eee4-456d-86e0-5e7dc15be82d">
+            <CVE_VALUE DESCRIPTION="This annotation represents is the best available pronunciation of this headword or example sentence and should be included in &quot;The Michif Dictionary.&quot;" LANG_REF="eng">Export</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_47d36889-6fb5-45e0-b3c8-3a22a54a6d16">
+            <CVE_VALUE DESCRIPTION="This annotation is another pronunciation of this headword or example sentence, but is not the one that we want to use in &quot;The Michif Dictionary.&quot;" LANG_REF="eng">Don't export</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+    <CONTROLLED_VOCABULARY CV_ID="CV-TMD-AnnotationStatus">
+        <DESCRIPTION LANG_REF="eng">Status of annotations in transcripts for "The Michif Dictionary."</DESCRIPTION>
+        <CV_ENTRY_ML CVE_ID="cveid_e095041d-050c-4732-846c-9f7805c85c51">
+            <CVE_VALUE DESCRIPTION="Annotations needs to be checked by other project team members" LANG_REF="eng">Needs review</CVE_VALUE>
+        </CV_ENTRY_ML>
+        <CV_ENTRY_ML CVE_ID="cveid_acbdc3e0-dd30-496e-b796-bf98eb59a358">
+            <CVE_VALUE DESCRIPTION="Annotation confirmed to have been entered correctly" LANG_REF="eng">Verified</CVE_VALUE>
+        </CV_ENTRY_ML>
+    </CONTROLLED_VOCABULARY>
+</ANNOTATION_DOCUMENT>

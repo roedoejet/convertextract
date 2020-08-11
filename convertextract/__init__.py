@@ -1,3 +1,3 @@
-from .parsers import process, process_text
+from convertextract.parsers import process, process_text
 
-VERSION = "3.1.0"
+VERSION = "3.1.2"

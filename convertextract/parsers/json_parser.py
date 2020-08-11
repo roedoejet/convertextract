@@ -1,7 +1,7 @@
 import json
 import six
 
-from .utils import BaseParser
+from convertextract.parsers.utils import BaseParser
 
 class Parser(BaseParser):
     """Extract all of the string values of a json file (no keys as those
