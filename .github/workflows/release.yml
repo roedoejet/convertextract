@@ -6,6 +6,8 @@ name: Release
 on:
   push:
     branches: [ release ]
+  repository_dispatch:
+    types: [ release ]
 jobs:
   PyPI:
     runs-on: ubuntu-latest

@@ -43,3 +43,14 @@ jobs:
           branch: release
           force: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: trigger release
+        run: |
+          curl --location --request POST 'https://api.github.com/repos/roedoejet/convertextract/dispatches' \
+          --header 'Accept: application/vnd.github.everest-preview+json' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'Content-Type: text/plain' \
+          --data-raw '{
+            "event_type": "release",
+            "client_payload": {}
+          }'
