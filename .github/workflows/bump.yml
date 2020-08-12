@@ -1,6 +1,8 @@
 # This workflow will bump the version of convertextract and trigger a build when a new
 # version of g2p is built (and a dispatch is sent as a result)
 
+name: G2P trigger
+
 on:
   repository_dispatch:
     types: [ g2p-published ]
