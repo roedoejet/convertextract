@@ -48,7 +48,7 @@ jobs:
           curl --location --request POST 'https://api.github.com/repos/roedoejet/convertextract/dispatches' \
           --header 'Accept: application/vnd.github.everest-preview+json' \
           --header 'Content-Type: application/json' \
-          --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'Authorization: Bearer ${{ secrets.G2P_PAT }}' \
           --header 'Content-Type: text/plain' \
           --data-raw '{
             "event_type": "release",
