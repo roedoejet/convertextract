@@ -1,0 +1,36 @@
+# This workflow will bump the version of convertextract and trigger a build when a new
+# version of g2p is built (and a dispatch is sent as a result)
+
+on:
+  repository_dispatch:
+    types: [ g2p-published ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: bump
+        run: |
+          current=$(python3 setup.py --version)
+          bumped=$( echo $current | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+          echo "Bumping from version ${current} to ${bumped}"
+          cd convertextract && sed -i '' "s/${current}/${bumped}/g" __init__.py
+      - name: commit
+        run: | 
+          git config --local user.email "bot@github.com"
+          git config --local user.name "GitHub Action test"
+          git add .
+          git commit -m "chore: bump to ${bumped}"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          branch: release
+          github_token: ${{ secrets.GITHUB_TOKEN }}
