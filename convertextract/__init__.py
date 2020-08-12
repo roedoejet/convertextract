@@ -1,3 +1,3 @@
 from convertextract.parsers import process, process_text
 
-VERSION = "3.2.5"
+VERSION = "3.2.6"
