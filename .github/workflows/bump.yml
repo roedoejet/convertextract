@@ -25,12 +25,14 @@ jobs:
           bumped=$( echo $current | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
           echo "Bumping from version ${current} to ${bumped}"
           cd convertextract && sed -i -e "s/${current}/${bumped}/g" __init__.py
+          echo "::set-env name=bumped::$bumped"
       - name: commit
         run: | 
           git config --local user.email "bot@github.com"
           git config --local user.name "GitHub Action test"
           git add .
           git commit -m "chore: bump to ${bumped}"
+
       - name: Push changes # push the output folder to your repo
         uses: ad-m/github-push-action@master
         with:
