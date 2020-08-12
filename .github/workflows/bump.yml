@@ -7,7 +7,7 @@ on:
   repository_dispatch:
     types: [ g2p-published ]
 jobs:
-  test:
+  bump:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +15,10 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: bump
         run: |
           current=$(python3 setup.py --version)
