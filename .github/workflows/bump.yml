@@ -29,7 +29,7 @@ jobs:
       - name: commit
         run: | 
           git config --local user.email "bot@github.com"
-          git config --local user.name "GitHub Action test"
+          git config --local user.name "GitHub Action Bot"
           git add .
           git commit -m "chore: bump to ${bumped}"
 
