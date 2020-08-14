@@ -113,7 +113,7 @@ text = convertextract.process_text('test', mapping=[{'in': 't', 'out': 'p', 'con
 
 ## Use with GUI (Graphical User Interface)
 
-Convertextract can also run in a GUI (for Mac **only**)
+Convertextract can also run in a GUI (for Mac 10.14.6 or higher **only**)
 
 ### Installing the GUI
 To download the app, go to [https://github.com/roedoejet/convertextract/releases](https://github.com/roedoejet/convertextract/releases) and select the most recent version.
