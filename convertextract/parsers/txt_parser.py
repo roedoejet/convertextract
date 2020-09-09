@@ -17,6 +17,5 @@ class Parser(BaseParser):
             pass
         else:
             with open(converted_filename, 'w', encoding='utf8') as textfile:
-                textfile.write(text)
-                        
+                textfile.write(text)         
         return text

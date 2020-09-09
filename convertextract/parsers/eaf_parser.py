@@ -31,7 +31,7 @@ class Parser(BaseParser):
 
                 new_eaf_obj.add_annotation(tier, res[0], res[1], value = new_res)
            
-        if "no_write" not in kwargs or kwargs['no_write']:
+        if "no_write" in kwargs and kwargs['no_write']:
             pass
         else:
             pympi.Elan.to_eaf(converted_filename, new_eaf_obj, pretty=True)
