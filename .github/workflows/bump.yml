@@ -20,6 +20,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: bump
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         run: |
           current=$(python3 setup.py --version)
           bumped=$( echo $current | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')

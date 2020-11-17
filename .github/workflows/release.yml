@@ -34,12 +34,13 @@ jobs:
           name: pypi
           path: dist/
   Mac:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: setup pyenv
         env: 
           PYTHON_CONFIGURE_OPTS: "--enable-framework"
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         uses: "gabrielfalcao/pyenv-action@v5"
         with:
           default: 3.6.9
@@ -58,6 +59,8 @@ jobs:
           name: macOS
           path: convertextract/dist/
       - name: zip
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         run: |
           echo "::set-env name=PKG_VERSION::$(python3 -c "import pkg_resources; print(pkg_resources.get_distribution('convertextract').version)")"
           zip -r release.zip convertextract/dist
