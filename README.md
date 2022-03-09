@@ -8,6 +8,25 @@
 
 Extract and find/replace text based on arbitrary correspondences. This library is a fork from the Textract library by Dean Malmgren. https://github.com/deanmalmgren/textract
 
+# Citation
+
+To cite this work, please use the following (APA):
+
+Pine, A., & Turin, M. (2018). Seeing the Heiltsuk orthography from font encoding through to Unicode: A case study using convertextract. In Proceedings of the LREC 2018 Workshop “CCURL 2018–Sustaining knowledge diversity in the digital age” (pp. 27-30). European Language Resources Association.
+
+or BibTex:
+
+```
+@inproceedings{pine2018convertextract,
+  title={{Seeing the Heiltsuk orthography from font encoding through to Unicode: A case study using convertextract}},
+  author={Pine, Aidan and Turin, Mark},
+  booktitle={{Proceedings of the LREC 2018 Workshop “CCURL 2018--Sustaining knowledge diversity in the digital age”}},
+  pages={27--30},
+  year={2018},
+  organization={{European Language Resources Association}}
+}
+```
+
 # Documentation
 
 ## Installation
