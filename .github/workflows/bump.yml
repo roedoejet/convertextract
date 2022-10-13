@@ -4,8 +4,10 @@
 name: G2P trigger
 
 on:
+  workflow_dispatch:
   repository_dispatch:
-    types: [ g2p-published ]
+    types: [g2p-published]
+
 jobs:
   bump:
     runs-on: ubuntu-latest
@@ -14,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -29,7 +31,7 @@ jobs:
           cd convertextract && sed -i -e "s/${current}/${bumped}/g" __init__.py
           echo "::set-env name=bumped::$bumped"
       - name: commit
-        run: | 
+        run: |
           git config --local user.email "bot@github.com"
           git config --local user.name "GitHub Action Bot"
           git add .
