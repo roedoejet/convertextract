@@ -7,4 +7,4 @@ xlrd==1.0.0
 openpyxl
 pympi-ling>=1.69
 six>=1.10.0
-g2p>=0.4
+g2p>=0.4,<2.0
